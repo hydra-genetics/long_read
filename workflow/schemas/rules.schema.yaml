@@ -2,3 +2,27 @@ $schema: "http://json-schema.org/draft-04/schema#"
 description: snakemake rule input and output files description file
 type: object
 properties:
+  minimap2:
+    type: object
+    description: input and output parameters for minimap2
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          query:
+            type: array
+            description: one or two files with reads
+          target:
+            target: string
+            description: genome fasta file
+          index:
+            target: string
+            description: genome index (mmi) file
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          bam:
+            type: string
+            description: output file from minimap2 sam/bam or paf file
