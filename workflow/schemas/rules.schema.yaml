@@ -2,3 +2,23 @@ $schema: "http://json-schema.org/draft-04/schema#"
 description: snakemake rule input and output files description file
 type: object
 properties:
+
+  pbsv_discover:
+    type: object
+    description: input and output parameters for pbsv_discover
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          bam:
+            type: string
+            description: merged and sorted bam file with packbio data
+
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          svsig:
+            type: string
+            description: Structural variant signatures used to call structural variants by pbsv

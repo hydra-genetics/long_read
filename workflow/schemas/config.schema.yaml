@@ -16,10 +16,24 @@ properties:
     type: string
     description: name or path to a default docker/singularity container
 
+
+  pbsv_discover:
+    type: object
+    description: parameters for pbsv_discover
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+
 required:
   - samples
   - units
   - output
   - resources
   - default_container
-
