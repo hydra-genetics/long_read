@@ -1,0 +1,11 @@
+output: "output_files.json"
+resources: "resources.yaml"
+samples: "samples_pb.tsv"
+units: "units_pb.tsv"
+
+default_container: "docker://hydragenetics/common:0.1.1"
+
+pbmm2_align:
+  container: docker://hydragenetics/pbmm2:1.10.0
+  index: reference/homo_sapiens.mmi
+  preset: "HIFI"
