@@ -3,3 +3,9 @@ samples: "samples.tsv"
 units: "units.tsv"
 
 default_container: "docker://hydragenetics/common:0.1.1"
+
+reference:
+  fasta: "data/reference.fasta"
+
+sniffles:
+  container: "docker://hydragenetics/sniffles2:2.0.7"

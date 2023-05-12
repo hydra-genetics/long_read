@@ -39,6 +39,9 @@ properties:
       extra:
         type: string
         description: parameters that should be forwarded 
+      non_germline:
+        type: string
+        description: parameter --non-germline to run somatic
 
 required:
   - samples

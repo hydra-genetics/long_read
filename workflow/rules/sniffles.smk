@@ -12,6 +12,7 @@ rule sniffles:
         vcf="long_read/sniffles/{sample}_{type}.vcf",
     params:
         extra=config.get("sniffles", {}).get("extra", ""),
+        nongermline=config.get("sniffles", {}).get("non_germline", ""),
     log:
         "long_read/sniffles/{sample}_{type}.vcf.log",
     benchmark:
@@ -26,6 +27,11 @@ rule sniffles:
     container:
         config.get("sniffles", {}).get("container", config["default_container"])
     message:
-        "{rule}: Calls SVs on long_read/{rule}/{wildcards.sample}_{wildcards.type}.input with sniffles"
+        "{rule}: Calls SVs on {input.bam} with sniffles"
     script:
-        "sniffles -i {input.bam} --reference {input.fasta} -t {threads} {params.extra} -v {output.vcf} &> {log}"
+        "sniffles -i {input.bam}"
+        "--reference {input.fasta}"
+        "-t {threads}"
+        "{params.nongermline}"
+        "{params.extra}"
+        "-v {output.vcf} &> {log}"
