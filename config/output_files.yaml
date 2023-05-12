@@ -1,0 +1,5 @@
+files: 
+    - name: "_copy_sniffles_vcf"
+       input: "long_read/sniffles/{sample}_{type}.vcf"
+       output: "results/sv/sniffles/{sample}_{type}.vcf"
+
