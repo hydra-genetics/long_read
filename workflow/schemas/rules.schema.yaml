@@ -46,3 +46,25 @@ properties:
           vcf:
             type: string
             description: vcf file with structural variant calls
+
+  sniffles:
+    type: object
+    description: input and output parameters for sniffles
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          bam:
+            type: string
+            description: mapped bam file
+          fasta:
+            type: string
+            description: reference fasta files that bams have been mapped to
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          vcf:
+            type: string
+            description: output vcf file

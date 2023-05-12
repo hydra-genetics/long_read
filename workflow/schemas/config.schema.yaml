@@ -16,6 +16,15 @@ properties:
     type: string
     description: name or path to a default docker/singularity container
 
+  reference:
+    type: object
+    description: references
+    properties:
+      fasta:
+        type: string
+        description: human reference for mapping
+    required:
+      -fasta 
 
   pbsv_discover:
     type: object
@@ -31,11 +40,9 @@ properties:
         type: string
         description: parameters that should be forwarded
 
-
   pbsv_call:
     type: object
     description: parameters for pbsv_call
-    properties:
       benchmark_repeats:
         type: integer
         description: set number of times benchmark should be repeated
@@ -48,6 +55,23 @@ properties:
       extra:
         type: string
         description: parameters that should be forwarded
+        
+  sniffles:
+    type: object
+    description: parameters for sniffles
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded 
+      non_germline:
+        type: string
+        description: parameter --non-germline to run somatic
 
 required:
   - samples
