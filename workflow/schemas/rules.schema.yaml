@@ -4,7 +4,6 @@ type: object
 properties:
 
 
-# Entry added using Hydra-Genetics CLI - please move it into alphabetically sorted order
   sniffles:
     type: object
     description: input and output parameters for sniffles
@@ -13,16 +12,19 @@ properties:
         type: object
         description: list of inputs
         properties:
-          input1:
+          bam:
             type: string
-            description: description input1
+            description: mapped bam file
+          fasta:
+            type: string
+            description: reference fasta files that bams have been mapped to
             #value: set to override value in table, else remove
 
       output:
         type: object
         description: list of outputs
         properties:
-          output1:
+          vcf:
             type: string
-            description: description output1
+            description: output vcf file
             #value: set to override value in table, else remove
