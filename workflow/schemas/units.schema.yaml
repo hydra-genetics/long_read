@@ -11,7 +11,7 @@ properties:
   platform:
     type: string
     description: sequence platform that have been used to generate data, ex NextSeq
-  machine: 
+  machine:
     type: string
     description: machine id
   flowcell:
@@ -26,18 +26,12 @@ properties:
     description: lane number
   fastq1:
     type: string
-    description: absolute path to R1 fastq file
-  fastq2:
+    description: absolute path to fastq file
+  bam:
     type: string
-    description: absolute path to R2 fastq file
-  adapter:
-    type: string
-    description: one or more sequence, separated by ","
+    description: absolute path to bam file
 required:
-  - adapter
   - barcode
-  - fastq1
-  - fastq2
   - flowcell
   - lane
   - platform
