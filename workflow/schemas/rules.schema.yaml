@@ -14,7 +14,6 @@ properties:
           bam:
             type: string
             description: merged and sorted bam file with packbio data
-
       output:
         type: object
         description: list of outputs
@@ -22,3 +21,28 @@ properties:
           svsig:
             type: string
             description: Structural variant signatures used to call structural variants by pbsv
+
+  pbsv_call:
+    type: object
+    description: input and output parameters for pbsv_call
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          ref:
+            type: string
+            description: human genome fasta reference
+          svsig:
+            type: string
+            description: structural variant signatures used to call structural variants produced by pbsv
+          tabix:
+            type: string
+            description: tabix indexed svsig .gz file for random access
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          vcf:
+            type: string
+            description: vcf file with structural variant calls

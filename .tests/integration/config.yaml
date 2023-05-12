@@ -1,11 +1,16 @@
-resources: "resources.yaml"
+output: "config/output_list.yaml"
+resources: "config/resources.yaml"
 samples: "samples.tsv"
 units: "units.tsv"
 
 default_container: "docker://hydragenetics/common:0.3.0"
 
+reference:
+  fasta: "hg38_v14.fasta"
+
 pbsv_discover:
   container: docker://hydragenetics/pbsv:2.9.0
 
 pbsv_call:
-  container: docker://hydragenetics/pbsv:2.9.0 
+  container: docker://hydragenetics/pbsv:2.9.0
+  ccs: "--ccs"

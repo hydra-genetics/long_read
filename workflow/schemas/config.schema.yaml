@@ -31,6 +31,24 @@ properties:
         type: string
         description: parameters that should be forwarded
 
+
+  pbsv_call:
+    type: object
+    description: parameters for pbsv_call
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      ccs:
+        type: string
+        description: add --ccs when the data is from hifi data
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+
 required:
   - samples
   - units
