@@ -8,6 +8,6 @@ files:
     output: "results/sv/{sample}_{type}.sniffles.vcf"
 
   - name: "_copy_minimap2_tsv"
-    output: "result/{sample}_{type}.output.minimap2.bam."
+    output: "result/{sample}_{type}.output.minimap2.bam"
     input: "long_read/minimap2/{sample}_{type}.bam"
     
