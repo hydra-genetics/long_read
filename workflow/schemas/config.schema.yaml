@@ -16,6 +16,22 @@ properties:
     type: string
     description: name or path to a default docker/singularity container
 
+  reference:
+    type: object
+    description: reference used by alignment
+    properties:
+      fasta:
+        type: string
+        description: fasta reference file
+      fai:
+        type: string
+        description: fasta reference fai file
+      skip_chrs:
+        type: array
+        items:
+            type: string
+        description: list of chromosomes that should be skipped, used when determining which chr bam files will be merged
+
   minimap2:
     type: object
     description: parameters for minimap2
@@ -38,22 +54,53 @@ properties:
       sorting_extra:
         type: string
         description: extra paramters that will be forwared to samtools/picard
-        
-  reference:
+
+  pbsv_discover:
     type: object
-    description: reference used by alignment
+    description: parameters for pbsv_discover
     properties:
-      fasta:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
         type: string
-        description: fasta reference file
-      fai:
+        description: name or path to docker/singularity container
+      extra:
         type: string
-        description: fasta reference fai file
-      skip_chrs:
-        type: array
-        items:
-            type: string
-        description: list of chromosomes that should be skipped, used when determining which chr bam files will be merged
+        description: parameters that should be forwarded
+        
+  pbsv_call:
+    type: object
+    description: parameters for pbsv_call
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      ccs:
+        type: string
+        description: add --ccs when the data is from hifi data
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+        
+  sniffles:
+    type: object
+    description: parameters for sniffles
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded 
+      non_germline:
+        type: string
+        description: parameter --non-germline to run somatic
 
 required:
   - samples
@@ -61,4 +108,3 @@ required:
   - output
   - resources
   - default_container
-
