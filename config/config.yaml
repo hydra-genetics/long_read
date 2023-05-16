@@ -1,4 +1,4 @@
-output: "config/output_list.yaml"
+output: "config/output_files.yaml"
 resources: "config/resources.yaml"
 samples: "samples.tsv"
 units: "units.tsv"

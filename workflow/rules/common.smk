@@ -125,14 +125,15 @@ def generate_copy_rules(output_spec):
 
 def get_minimap2_query(wildcards):
     input = get_units(units, wildcards)
-    if hasattr(input[0], "bam") and not input[0].bam == "NO_PATH":
+    if hasattr(input[0], "bam") and pandas.notna(input[0].bam):
         query_files = [input[0].bam]
-    elif hasattr(input[0], "fastq1") and not input[0].fastq1 == "NO_PATH":
+    elif hasattr(input[0], "fastq1") and pandas.notna(input[0].fastq1):
         query_files = [input[0].fastq1]
-        if hasattr(input[0], "fastq2") and not input[0].fastq2 == "NO_PATH":
+        if hasattr(input[0], "fastq2") and pandas.notna(input[0].fastq2):
             query_files.append(input[0].fastq2)
     else:
         raise ValueError("Neither fastq or bam file configured for {wildcard.sample}")
+    print(query_files)
     return query_files
 
 

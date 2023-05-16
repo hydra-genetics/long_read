@@ -10,15 +10,15 @@ rule minimap2:
         target=config.get("reference", []).get("fasta", ""),
         index=config.get("minimap2", {}).get("index", ""),
     output:
-        bam="long_read/minimap2/{sample}_{type}.output.bam",
+        bam="long_read/minimap2/{sample}_{type}.bam",
     params:
         extra=config.get("minimap2", {}).get("extra", ""),
         sorting=config.get("minimap2", {}).get("sorting", ""),
         sorting_extra=config.get("minimap2", {}).get("sorting_extra", ""),
     log:
-        "long_read/minimap2/{sample}_{type}.output.log",
+        "long_read/minimap2/{sample}_{type}.bam.log",
     benchmark:
-        repeat("long_read/minimap2/{sample}_{type}.output.benchmark.tsv", config.get("minimap2", {}).get("benchmark_repeats", 1))
+        repeat("long_read/minimap2/{sample}_{type}.bam.benchmark.tsv", config.get("minimap2", {}).get("benchmark_repeats", 1))
     threads: config.get("minimap2", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("minimap2", {}).get("mem_mb", config["default_resources"]["mem_mb"]),

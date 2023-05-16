@@ -1,14 +1,24 @@
 ---
 
- output: "config/output_files.json"
+ output: "config/output_files.yaml"
  resources: "config/resources.yaml"
  samples: "samples.tsv"
  units: "units.tsv"
 
  default_container: "docker://hydragenetics/common:0.3.0"
 
- reference:
-   fasta: "reference/reference.fasta"
-
  minimap2:
-   index: "reference/reference.mmi"
+   index: data/reference.mmi
+
+ reference:
+   fasta: "data/reference.fasta"
+
+ pbsv_discover:
+   container: docker://hydragenetics/pbsv:2.9.0
+
+ pbsv_call:
+   container: docker://hydragenetics/pbsv:2.9.0
+   ccs: "--ccs"
+
+ sniffles:
+   container: "docker://hydragenetics/sniffles2:2.0.7"

@@ -72,6 +72,7 @@ properties:
   pbsv_call:
     type: object
     description: parameters for pbsv_call
+    properties:
       benchmark_repeats:
         type: integer
         description: set number of times benchmark should be repeated
