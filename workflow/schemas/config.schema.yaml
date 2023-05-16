@@ -18,13 +18,42 @@ properties:
 
   reference:
     type: object
-    description: references
+    description: reference used by alignment
     properties:
       fasta:
         type: string
-        description: human reference for mapping
-    required:
-      -fasta 
+        description: fasta reference file
+      fai:
+        type: string
+        description: fasta reference fai file
+      skip_chrs:
+        type: array
+        items:
+            type: string
+        description: list of chromosomes that should be skipped, used when determining which chr bam files will be merged
+
+  minimap2:
+    type: object
+    description: parameters for minimap2
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+      index:
+        type: string
+        description: path to minimap2 index
+      sorting:
+        type: string
+        description: sort order of output file, coordinate or queryname, default coordinate
+      sorting_extra:
+        type: string
+        description: extra paramters that will be forwared to samtools/picard
 
   pbsv_discover:
     type: object
@@ -39,10 +68,11 @@ properties:
       extra:
         type: string
         description: parameters that should be forwarded
-
+        
   pbsv_call:
     type: object
     description: parameters for pbsv_call
+    properties:
       benchmark_repeats:
         type: integer
         description: set number of times benchmark should be repeated

@@ -6,7 +6,7 @@ __license__ = "GPL-3"
 
 rule pbsv_discover:
     input:
-        bam="long_read/samtools_merged_bam/{samnple}_{type}.bam",
+        bam="long_read/samtools_merged_bam/{sample}_{type}.bam",
     output:
         svsig="long_read/pbsv_discover/{sample}_{type}.svsig.gz",
     params:
@@ -69,7 +69,6 @@ rule pbsv_call:
         "(pbsv call "
         "{input.ref} "
         "-r {input.svsig} "
-        "{ouput.vcf} "
+        "{output.vcf} "
         "{params.extra} "
-        "{extra}) "
         "&> {log}"

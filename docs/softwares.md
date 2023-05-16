@@ -1,5 +1,27 @@
 # Softwares used in the long_read module
 
+## [minimap2](https://github.com/lh3/minimap2)
+A versatile pairwise aligner for genomic and spliced nucleotide sequences 
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__minimap2__minimap2#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__minimap2__minimap2#
+
+#CONFIGSCHEMA__minimap2#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__minimap2#
+=======
+#CONFIGSCHEMA__pbsv_discover#
+
+#### Resources settings (`resources.yaml`)
+
+
 ## [pbsv_discover](https://github.com/PacificBiosciences/pbsv)
 pbsv is a suite of tools to call and analyze structural variants in diploid genomes from PacBio single molecule real-time sequencing (SMRT) reads. This rule uses a bam file to find structural variant candidates.
 
@@ -9,15 +31,9 @@ pbsv is a suite of tools to call and analyze structural variants in diploid geno
 
 #### :left_right_arrow: input / output files
 
-#SNAKEMAKE_RULE_TABLE__pbsv__pbsv_discover#
-
 ### :wrench: Configuration
 
 #### Software settings (`config.yaml`)
-
-#CONFIGSCHEMA__pbsv_discover#
-
-#### Resources settings (`resources.yaml`)
 
 #RESOURCESSCHEMA__pbsv_discover#
 
