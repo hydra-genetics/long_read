@@ -5,6 +5,7 @@ __license__ = "GPL-3"
 
 
 include: "rules/common.smk"
+include: "rules/guppy.smk"
 include: "rules/minimap2.smk"
 include: "rules/pbsv.smk"
 include: "rules/sniffles.smk"
