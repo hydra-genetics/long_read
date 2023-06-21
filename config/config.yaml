@@ -8,6 +8,19 @@ default_container: "docker://hydragenetics/common:0.3.0"
 reference:
   fasta: "data/reference.fasta"
 
+basecaller: "gpu"
+
+guppy_basecaller_cpu:
+  container: docker://genomicpariscentre/guppy:6.5.7
+  configuration_file: "config.cfg"
+  num_callers: 1
+  threads_per_caller: 1
+
+guppy_basecaller_gpu:
+  container: docker://genomicpariscentre/guppy-gpu:6.5.7
+  configuration_file: "config.cfg"
+  chunks: 20
+
 pbsv_discover:
   container: docker://hydragenetics/pbsv:2.9.0
 
