@@ -32,6 +32,10 @@ properties:
             type: string
         description: list of chromosomes that should be skipped, used when determining which chr bam files will be merged
 
+  basecaller: 
+    type: string
+    description: cpu or gpu. determines which version of guppy to use 
+
   guppy_basecaller_cpu:
     type: object
     description: parameters for guppy with cpu option
