@@ -8,7 +8,7 @@ default_container: "docker://hydragenetics/common:0.3.0"
 reference:
   fasta: "data/reference.fasta"
 
-basecaller: "gpu"
+basecaller: "gpu" #gpu or cpu
 
 guppy_basecaller_cpu:
   container: docker://genomicpariscentre/guppy:6.5.7
