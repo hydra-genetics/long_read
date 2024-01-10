@@ -2,6 +2,12 @@ $schema: "http://json-schema.org/draft-04/schema#"
 description: snakemake rule input and output files description file
 type: object
 properties:
+
+
+# Entry added using Hydra-Genetics CLI - please move it into alphabetically sorted order
+  pbmm2_align:
+    type: object
+    description: input and output parameters for pbmm2_align
   minimap2:
     type: object
     description: input and output parameters for minimap2
@@ -10,6 +16,11 @@ properties:
         type: object
         description: list of inputs
         properties:
+          input1:
+            type: string
+            description: description input1
+            #value: set to override value in table, else remove
+
           query:
             type: array
             description: one or two files with reads
@@ -23,6 +34,10 @@ properties:
         type: object
         description: list of outputs
         properties:
+          output1:
+            type: string
+            description: description output1
+            #value: set to override value in table, else remove
           bam:
             type: string
             description: output file from minimap2 sam/bam or paf file

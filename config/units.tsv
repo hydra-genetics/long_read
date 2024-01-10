@@ -1,6 +1,6 @@
-sample	type	platform	machine	flowcell	lane	barcode	fastq1	bam
+sample	type	platform	machine	flowcell	lane	barcode	fastq	bam
 om-089-1	T	ONT	GridION	GridION	001	ACGT	om-089-001.ds0_01.fastq.gz	dummy
 om-089-2	T	ONT	PromethION	PromethION	001	ACTG	om-089-001.ds0_01.fastq.gz	dummy
-HG002-1	T	PACBIO	ASTRO	m84045_230420_150058_s1	001	dummy	HG002-rep1_m84011_220902_175841_s1.hifi_reads.bam
-HG002-2	T	PACBIO	RS	m84045_230420_150058_s1	001	dummy	HG002-rep1_m84011_220902_175841_s1.hifi_reads.bam
-HG002-3	T	PACBIO	SEQUEL	m84045_230420_150058_s1	001	dummy	HG002-rep1_m84011_220902_175841_s1.hifi_reads.bam
+HG002-1	T	PACBIO	ASTRO	m84045_230420_150058_s1	001	ACTG	dummy	HG002-rep1_m84011_220902_175841_s1.hifi_reads.bam
+HG002-2	T	PACBIO	RS	m84045_230420_150058_s1	001	ACTG	dummy	HG002-rep2_m84011_220902_175841_s1.hifi_reads.bam
+HG002-3	T	PACBIO	SEQUEL	m84045_230420_150058_s1	001	ACTG	dummy	HG002-rep3_m84011_220902_175841_s1.hifi_reads.bam

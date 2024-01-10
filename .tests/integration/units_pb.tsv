@@ -1,0 +1,2 @@
+sample	type	platform	machine	flowcell	lane	barcode	fastq1	bam
+HG002	T	PACBIO	REVIO	m84011_220902_175841_s1	001	ATGC	dummy	ubam/HG002-rep1_m84011_220902_175841_s1.hifi_reads.bam

@@ -83,7 +83,11 @@ properties:
       time:
         type: string
         description: max execution time
-        
+
+  pbmm2_align:
+    type: object
+    description: resource definitions for pbmm2_align
+
   pbsv_discover:
     type: object
     description: resource definitions for pbsv_discover
@@ -123,7 +127,7 @@ properties:
       time:
         type: string
         description: max execution time
-    
+
   sniffles:
     type: object
     description: resource definitions for sniffles
