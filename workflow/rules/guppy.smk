@@ -16,8 +16,8 @@ elif basecaller == "gpu":
             fast5dir="long_read/fast5",
             configfile=config["guppy_basecaller_gpu"]["configuration_file"],
         output:
-            seqsum="long_read/guppy/sequencing_summary.txt"
-            fastq=
+            seqsum="long_read/guppy/sequencing_summary.txt",
+            fastq="long_read/guppy/guppy_basecaller.gpu.fastq",
         params:
             extra=config.get("guppy_basecaller_gpu", {}).get("extra", ""),
             gpu="cuda:0",
@@ -27,7 +27,8 @@ elif basecaller == "gpu":
             "long_read/guppy/guppy_basecaller_gpu.log",
         benchmark:
             repeat("long_read/guppy/guppy_basecaller_gpu.benchmark.tsv", config.get("guppy_basecaller_gpu", {}).get("benchmark_repeats", 1))
-        threads: config.get("guppy_basecaller_gpu", {}).get("threads", config["default_resources"]["threads"])
+        threads: 
+            config.get("guppy_basecaller_gpu", {}).get("threads", config["default_resources"]["threads"])
         resources:
             mem_mb=config.get("guppy_basecaller_gpu", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
             mem_per_cpu=config.get("guppy_basecaller_gpu", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
@@ -35,7 +36,7 @@ elif basecaller == "gpu":
             threads=config.get("guppy_basecaller_gpu", {}).get("threads", config["default_resources"]["threads"]),
             time=config.get("guppy_basecaller_gpu", {}).get("time", config["default_resources"]["time"]),
         container:
-            config.get("guppy_basecaller_gpu", {}).get("container", config["default_container"])
+            config.get("guppy_basecaller_gpu", {}).get("container", config["default_container"]),
         message:
             "{rule}: guppy basecalling fast5 files using GPU"
         script:
@@ -54,7 +55,7 @@ elif basecaller == "cpu":
             configfile=config["guppy_basecaller_cpu"]["configuration_file"],
         output:
             seqsum="long_read/guppy/sequencing_summary.txt",
-            fastq= #
+            fastq="long_read/guppy/guppy_basecaller_cpu.fastq", 
         params:
             extra=config.get("guppy_basecaller_cpu", {}).get("extra", ""),
             num_caller=config.get("guppy_basecaller_cpu", {}).get("num_callers", "1"),
@@ -63,7 +64,8 @@ elif basecaller == "cpu":
             "long_read/guppy/guppy_basecaller_cpu.log",
         benchmark:
             repeat("long_read/guppy/guppy_basecaller_cpu.benchmark.tsv", config.get("guppy_basecaller_cpu", {}).get("benchmark_repeats", 1))
-        threads: config.get("guppy_basecaller_cpu", {}).get("threads", config["default_resources"]["threads"])
+        threads: 
+            config.get("guppy_basecaller_cpu", {}).get("threads", config["default_resources"]["threads"])
         resources:
             mem_mb=config.get("guppy_basecaller_cpu", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
             mem_per_cpu=config.get("guppy_basecaller_cpu", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),

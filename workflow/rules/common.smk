@@ -59,12 +59,9 @@ wildcard_constraints:
 
 
 def pbmm2_input(wildcards):
-
     platform = 'PACBIO'
-    unit = units.loc[(wildcards.sample, wildcards.type, wildcards.flowcell, 
-    wildcards.barcode, platform)].dropna()
+    unit = units.loc[(wildcards.sample, wildcards.type, wildcards.flowcell, wildcards.barcode, platform)].dropna()
     bam_file = unit["bam"] 
-
     return bam_file
 
 
