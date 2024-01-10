@@ -7,6 +7,13 @@ default_resources:
   mem_per_cpu: 6144
   partition: core
 
+guppy_basecaller_gpu:
+  partition: "GPU_low"
+  threads: 40 
+  gres: "--gres=gres:gpu:4"
+  mem_mb: 770000
+  mem_per_cpu: 4096
+
 sniffles:
   mem_mb: 24576
   threads: 4

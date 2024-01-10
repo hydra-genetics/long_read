@@ -3,8 +3,8 @@ __copyright__ = "Copyright 2023, Jonas Almlöf"
 __email__ = "jonas.almlof@scilifelab.uu.se"
 __license__ = "GPL-3"
 
-
 include: "rules/common.smk"
+include: "rules/guppy.smk"
 include: "rules/pbmm2.smk"
 include: "rules/minimap2.smk"
 include: "rules/pbsv.smk"

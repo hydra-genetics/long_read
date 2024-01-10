@@ -36,6 +36,53 @@ properties:
             type: string
         description: list of chromosomes that should be skipped, used when determining which chr bam files will be merged
 
+  basecaller: 
+    type: string
+    description: cpu or gpu. determines which version of guppy to use 
+
+  guppy_basecaller_cpu:
+    type: object
+    description: parameters for guppy with cpu option
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+      configuration_file:
+        type: string
+        description: configuration file with information on sequencing run
+      num_callers:
+        type: integer
+        description: number of parallel callers to create
+      threads_per_caller: 
+        type: integer
+        description: number of threads. Multiplied with num_callers should equal provided threads in resources
+
+  guppy_basecaller_gpu:
+    type: object
+    description: parameters for guppy with cpu option
+    properties:
+      benchmark_repeats:
+        type: integer
+        description: set number of times benchmark should be repeated
+      container:
+        type: string
+        description: name or path to docker/singularity container
+      extra:
+        type: string
+        description: parameters that should be forwarded
+      configuration_file:
+        type: string
+        description: configuration file with information on sequencing run
+      chunks:
+        type: integer
+        description: number of chunks to break reads into for basecalling
+   
   minimap2:
     type: object
     description: parameters for minimap2

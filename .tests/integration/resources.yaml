@@ -2,6 +2,13 @@ default_resources:
   threads: 1
   time: "12:00:00"
 
+guppy_basecaller_gpu:
+  partition: "GPU_low"
+  threads: 40 
+  gres: "--gres=gres:gpu:4"
+  mem_mb: 770000
+  mem_per_cpu: 4096
+
 sniffles: 
   threads: 4
   mem_mb: 4096
