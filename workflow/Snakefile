@@ -13,4 +13,3 @@ include: "rules/sniffles.smk"
 rule all:
     input:
         compile_output_file_list,
-

@@ -3,14 +3,12 @@ __copyright__ = "Copyright 2023, Nina Hollfelder"
 __email__ = "nina_hollfelder@scilifelab.uu.se"
 __license__ = "GPL-3"
 
-
 basecaller = config.get("basecaller", None)
 
 if basecaller is None:
     sys.exit("basecaller missing from config, valid options: gpu or cpu")
 
 elif basecaller == "gpu":
-
     rule guppy_basecaller_gpu:
         input:
             fast5dir="long_read/fast5",
@@ -48,7 +46,6 @@ elif basecaller == "gpu":
             " {params.extra} &> {log} "
 
 elif basecaller == "cpu":
-
     rule guppy_basecaller_cpu:
         input:
             fast5dir="long_read/fast5",
