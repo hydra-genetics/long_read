@@ -8,6 +8,9 @@ properties:
   pbmm2_align:
     type: object
     description: input and output parameters for pbmm2_align
+  minimap2:
+    type: object
+    description: input and output parameters for minimap2
     properties:
       input:
         type: object
@@ -18,6 +21,15 @@ properties:
             description: description input1
             #value: set to override value in table, else remove
 
+          query:
+            type: array
+            description: one or two files with reads
+          target:
+            target: string
+            description: genome fasta file
+          index:
+            target: string
+            description: genome index (mmi) file
       output:
         type: object
         description: list of outputs
@@ -26,3 +38,72 @@ properties:
             type: string
             description: description output1
             #value: set to override value in table, else remove
+          bam:
+            type: string
+            description: output file from minimap2 sam/bam or paf file
+
+  pbsv_discover:
+    type: object
+    description: input and output parameters for pbsv_discover
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          bam:
+            type: string
+            description: merged and sorted bam file with packbio data
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          svsig:
+            type: string
+            description: Structural variant signatures used to call structural variants by pbsv
+
+  pbsv_call:
+    type: object
+    description: input and output parameters for pbsv_call
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          ref:
+            type: string
+            description: human genome fasta reference
+          svsig:
+            type: string
+            description: structural variant signatures used to call structural variants produced by pbsv
+          tabix:
+            type: string
+            description: tabix indexed svsig .gz file for random access
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          vcf:
+            type: string
+            description: vcf file with structural variant calls
+
+  sniffles:
+    type: object
+    description: input and output parameters for sniffles
+    properties:
+      input:
+        type: object
+        description: list of inputs
+        properties:
+          bam:
+            type: string
+            description: mapped bam file
+          fasta:
+            type: string
+            description: reference fasta files that bams have been mapped to
+      output:
+        type: object
+        description: list of outputs
+        properties:
+          vcf:
+            type: string
+            description: output vcf file

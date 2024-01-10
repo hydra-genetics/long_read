@@ -1,13 +1,28 @@
----
-
- output: "config/output_files.json"
- resources: "config/resources.yaml"
- samples: "config/samples.tsv"
- units: "config/units.tsv"
+output: "config/output_files.yaml"
+resources: "config/resources.yaml"
+samples: "config/samples.tsv"
+units: "config/units.tsv"
 
  default_container: "docker://hydragenetics/common:0.3.0"
 
  pbmm2_align:
   index: reference/homo_sapiens.mmi
   preset: "HIFI"
+
+reference:
+  fasta: "data/reference.fasta"
+
+pbsv_discover:
+  container: docker://hydragenetics/pbsv:2.9.0
+
+pbsv_call:
+  container: docker://hydragenetics/pbsv:2.9.0
+  ccs: "--ccs"
+
+ sniffles:
+   container: "docker://hydragenetics/sniffles2:2.0.7"
+   extra: "" 
+   non_germline: "" #set to  --non-germline if running somatic
+
+
 

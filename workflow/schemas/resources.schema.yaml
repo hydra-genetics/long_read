@@ -19,14 +19,11 @@ properties:
         description: default memory used per cpu for a rule
       partition:
         type: string
-        description: default partition to use on the cluser for a rule
+        description: default partition to use on the cluster for a rule
 
-
-
-# Entry added using Hydra-Genetics CLI - please move it into alphabetically sorted order
-  pbmm2_align:
+  minimap2:
     type: object
-    description: resource definitions for pbmm2_align
+    description: resource definitions for minimap2
     properties:
       mem_mb:
         type: integer
@@ -44,5 +41,71 @@ properties:
         type: string
         description: max execution time
 
+  pbmm2_align:
+    type: object
+    description: resource definitions for pbmm2_align
+
+  pbsv_discover:
+    type: object
+    description: resource definitions for pbsv_discover
+    properties:
+      mem_mb:
+        type: integer
+        description: max memory in MB to be available
+      mem_per_cpu:
+        type: integer
+        description: memory in MB used per cpu
+      partition:
+        type: string
+        description: partition to use on cluster
+      threads:
+        type: integer
+        description: number of threads to be available
+      time:
+        type: string
+        description: max execution time
+
+  pbsv_call:
+    type: object
+    description: resource definitions for pbsv_call
+    properties:
+      mem_mb:
+        type: integer
+        description: max memory in MB to be available
+      mem_per_cpu:
+        type: integer
+        description: memory in MB used per cpu
+      partition:
+        type: string
+        description: partition to use on cluster
+      threads:
+        type: integer
+        description: number of threads to be available
+      time:
+        type: string
+        description: max execution time
+
+  sniffles:
+    type: object
+    description: resource definitions for sniffles
+    properties:
+      mem_mb:
+        type: integer
+        description: max memory in MB to be available
+      mem_per_cpu:
+        type: integer
+        description: memory in MB used per cpu
+      partition:
+        type: string
+        description: partition to use on cluster
+      threads:
+        type: integer
+        description: |
+            number of threads to be available 
+            RECOMMENDATION: minimum = 4
+      time:
+        type: string
+        description: max execution time
+        
 required:
   - default_resources
