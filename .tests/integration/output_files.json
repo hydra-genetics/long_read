@@ -1,0 +1,14 @@
+
+{
+  "files": [
+    {
+      "name": "_copy_samples_tsv",
+      "output": "result/samples.tsv",
+      "input": "samples_pb.tsv"
+    },
+    {"name": "_copy_bam",
+    "output": "result/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.bam",
+    "input": "long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.bam"
+    }
+  ]
+}

@@ -16,6 +16,10 @@ properties:
     type: string
     description: name or path to a default docker/singularity container
 
+# Entry added using Hydra-Genetics CLI - please move it into alphabetically sorted order
+  pbmm2_align:
+    type: object
+    description: parameters for pbmm2_align
   reference:
     type: object
     description: reference used by alignment

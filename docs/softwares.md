@@ -1,5 +1,15 @@
 # Softwares used in the long_read module
 
+## [pbmm2_align](url_to_tool)
+Introduction to pbmm2_align
+
+### :snake: Rule
+
+#SNAKEMAKE_RULE_SOURCE__pbmm2__pbmm2_align#
+
+#### :left_right_arrow: input / output files
+
+#SNAKEMAKE_RULE_TABLE__pbmm2__pbmm2_align#
 ## [minimap2](https://github.com/lh3/minimap2)
 A versatile pairwise aligner for genomic and spliced nucleotide sequences 
 
@@ -16,7 +26,7 @@ A versatile pairwise aligner for genomic and spliced nucleotide sequences
 #### Resources settings (`resources.yaml`)
 
 #RESOURCESSCHEMA__minimap2#
-=======
+
 #CONFIGSCHEMA__pbsv_discover#
 
 #### Resources settings (`resources.yaml`)
@@ -34,6 +44,12 @@ pbsv is a suite of tools to call and analyze structural variants in diploid geno
 ### :wrench: Configuration
 
 #### Software settings (`config.yaml`)
+
+#CONFIGSCHEMA__pbmm2_align#
+
+#### Resources settings (`resources.yaml`)
+
+#RESOURCESSCHEMA__pbmm2_align#
 
 #RESOURCESSCHEMA__pbsv_discover#
 

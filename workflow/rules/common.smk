@@ -37,7 +37,7 @@ validate(samples, schema="../schemas/samples.schema.yaml")
 
 units = (
     pandas.read_table(config["units"], dtype=str)
-    .set_index(["sample", "type", "flowcell", "lane", "barcode"], drop=False)
+    .set_index(["sample", "type", "flowcell", "barcode", "platform"], drop=False)
     .sort_index()
 )
 
@@ -58,6 +58,16 @@ wildcard_constraints:
     type="N|T|R",
 
 
+def pbmm2_input(wildcards):
+
+    platform = 'PACBIO'
+    unit = units.loc[(wildcards.sample, wildcards.type, wildcards.flowcell, 
+    wildcards.barcode, platform)].dropna()
+    bam_file = unit["bam"] 
+
+    return bam_file
+
+
 def compile_output_file_list(wildcards):
     outdir = pathlib.Path(output_spec.get("directory", "./"))
     output_files = []
@@ -67,9 +77,11 @@ def compile_output_file_list(wildcards):
         # that the output strings should be formatted with.
         outputpaths = set(
             [
-                f["output"].format(sample=sample, type=unit_type)
+                f["output"].format(sample=sample, type=unit_type, flowcell=flowcell, barcode=barcode)
                 for sample in get_samples(samples)
                 for unit_type in get_unit_types(units, sample)
+                for flowcell in set([u.flowcell for u in units.loc[(sample, unit_type)].dropna().itertuples()])
+                for barcode in set([u.barcode for u in units.loc[(sample, unit_type)].dropna().itertuples()])
             ]
         )
         for op in outputpaths:
@@ -103,7 +115,7 @@ def generate_copy_rules(output_spec):
                 f'@workflow.output("{output_file}")',
                 f'@workflow.log("logs/{rule_name}_{output_file.name}.log")',
                 f'@workflow.container("{copy_container}")',
-                '@workflow.conda("../envs/copy_results_files.yaml")',
+                # '@workflow.conda("../envs/copy_results_files.yaml")',
                 f'@workflow.resources(time="{time}", threads={threads}, mem_mb="{mem_mb}", '
                 f'mem_per_cpu={mem_per_cpu}, partition="{partition}")',
                 f'@workflow.shellcmd("{copy_container}")',
