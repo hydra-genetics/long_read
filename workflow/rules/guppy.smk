@@ -22,7 +22,7 @@ elif basecaller == "gpu":
             chunks=config.get("guppy_basecaller_gpu", {}).get("chunks", "20"),
             outdir=lambda wildcards, output: os.path.dirname(output[0]),
         log:
-            "long_read/guppy/guppy_basecaller_gpu.log",
+            "long_read/guppy/guppy_basecaller_gpu.log"
         benchmark:
             repeat("long_read/guppy/guppy_basecaller_gpu.benchmark.tsv", config.get("guppy_basecaller_gpu", {}).get("benchmark_repeats", 1))
         threads: 
