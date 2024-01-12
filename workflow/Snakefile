@@ -18,11 +18,3 @@ report: "report/workflow.rst"
 rule all:
     input:
         compile_output_file_list,
-
-
-# Add rule orders here if needed
-# ruleorder:
-
-
-# Add rules if needed
-# use rule * from cnv_sv as cnv_sv_*
