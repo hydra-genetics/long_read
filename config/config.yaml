@@ -12,7 +12,7 @@ units: "config/units.tsv"
 reference:
   fasta: "data/reference.fasta"
 
-basecaller: "gpu" #gpu or cpu
+basecaller: "cpu" #gpu or cpu
 
 guppy_basecaller_cpu:
   container: docker://genomicpariscentre/guppy:6.5.7
