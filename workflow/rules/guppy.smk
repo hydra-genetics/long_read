@@ -13,7 +13,7 @@ elif basecaller == "gpu":
     rule guppy_basecaller_gpu:
         input:
             fast5dir="long_read/fast5",
-            configfile=config["guppy_basecaller_gpu"]["configuration_file"],
+            #configfile=config["guppy_basecaller_gpu"]["configuration_file"],
         output:
             seqsum="long_read/guppy/sequencing_summary.txt",
             fastq="long_read/guppy/guppy_basecaller.gpu.fastq",
@@ -53,7 +53,7 @@ elif basecaller == "cpu":
     rule guppy_basecaller_cpu:
         input:
             fast5dir="long_read/fast5",
-            configfile=config["guppy_basecaller_cpu"]["configuration_file"],
+            #configfile=config["guppy_basecaller_cpu"]["configuration_file"],
         output:
             seqsum="long_read/guppy/sequencing_summary.txt",
             fastq="long_read/guppy/guppy_basecaller_cpu.fastq",
