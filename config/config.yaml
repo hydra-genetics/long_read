@@ -4,14 +4,6 @@ samples: "config/samples.tsv"
 units: "config/units.tsv"
 
  default_container: "docker://hydragenetics/common:0.3.0"
-
-
- default_resources:
-  threads: 1
-  time: "12:00:00"
-  mem_mb: 6144
-  mem_per_cpu: 6144
-  partition: core
   
  pbmm2_align:
   index: reference/homo_sapiens.mmi
