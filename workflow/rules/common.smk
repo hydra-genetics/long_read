@@ -97,7 +97,6 @@ def generate_copy_rules(output_spec):
         rule_name = "_copy_{}".format("_".join(re.split(r"\W{1,}", f["name"].strip().lower())))
         input_file = pathlib.Path(f["input"])
         output_file = output_directory / pathlib.Path(f["output"])
-
         mem_mb = config.get("_copy", {}).get("mem_mb", config["default_resources"]["mem_mb"])
         mem_per_cpu = config.get("_copy", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"])
         partition = config.get("_copy", {}).get("partition", config["default_resources"]["partition"])
