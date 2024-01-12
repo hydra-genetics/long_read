@@ -9,7 +9,6 @@ if basecaller is None:
     sys.exit("basecaller missing from config, valid options: gpu or cpu")
 
 elif basecaller == "gpu":
-
     rule guppy_basecaller_gpu:
         input:
             fast5dir="long_read/fast5",
@@ -49,7 +48,6 @@ elif basecaller == "gpu":
             " {params.extra} &> {log} "
 
 elif basecaller == "cpu":
-
     rule guppy_basecaller_cpu:
         input:
             fast5dir="long_read/fast5",
