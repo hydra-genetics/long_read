@@ -7,7 +7,7 @@ __license__ = "GPL-3"
 rule minimap2:
     input:
         query=lambda wildcards: get_minimap2_query(wildcards),
-        target=config.get("reference", {}.get("fasta", ""),
+        target=config.get("reference", {}).get("fasta", ""),
         index=config.get("minimap2", {}).get("index", ""),
     output:
         bam="long_read/minimap2/{sample}_{type}.bam",
