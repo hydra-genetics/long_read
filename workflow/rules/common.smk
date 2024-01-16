@@ -43,14 +43,12 @@ units = (
 
 validate(units, schema="../schemas/units.schema.yaml")
 
+output_spec = []
 with open(config["output"]) as output:
-    output_spec = []
     if config["output"].endswith("json"):
         output_spec = json.load(output)
     elif config["output"].endswith("yaml") or config["output"].endswith("yml"):
         output_spec = yaml.safe_load(output.read())
-    else:
-        output_spec = []
 validate(output_spec, schema="../schemas/output_files.schema.yaml")
 
 
