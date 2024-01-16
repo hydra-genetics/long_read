@@ -43,7 +43,7 @@ units = (
 
 validate(units, schema="../schemas/units.schema.yaml")
 
-output_spec = []
+output_spec = {'files':[]}
 with open(config["output"]) as output:
     if config["output"].endswith("json"):
         output_spec = json.load(output)
