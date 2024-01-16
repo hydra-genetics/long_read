@@ -133,7 +133,7 @@ def generate_copy_rules(output_spec):
 
 def get_minimap2_query(wildcards):
     input = get_units(units, wildcards)
-    print (input)
+    print ("INP:", input)
     if hasattr(input[0], "bam") and pandas.notna(input[0].bam):
         query_files = [input[0].bam]
     elif hasattr(input[0], "fastq1") and pandas.notna(input[0].fastq1):
