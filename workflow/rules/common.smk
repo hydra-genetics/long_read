@@ -44,6 +44,7 @@ units = (
 validate(units, schema="../schemas/units.schema.yaml")
 
 with open(config["output"]) as output:
+    output_spec = []
     if config["output"].endswith("json"):
         output_spec = json.load(output)
     elif config["output"].endswith("yaml") or config["output"].endswith("yml"):
