@@ -31,4 +31,4 @@ rule minimap2:
     message:
         "{rule}: run minimap2 on {input}"
     wrapper:
-        "v1.28.0/bio/minimap2/aligner"
+        "v3.3.5/bio/minimap2/aligner"
