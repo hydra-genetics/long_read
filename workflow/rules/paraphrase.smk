@@ -34,6 +34,6 @@ rule paraphrase:
         "--reference {input.fasta} "
         "--out {output.outfolder} "
         "{params.genome} "
-        "{params.extra} " &> {log} "
+        "{params.extra} &> {log} "
 
 # paraphase --bam /bam/HG002-rep4_m84011_220902_175841_s1.hifi_reads.bam -r /reference/homo_sapiens.fasta --out /paraphrase/ --genome 38 -g smn1,CR1,AMY1A,CTAG1A,BOLA2
