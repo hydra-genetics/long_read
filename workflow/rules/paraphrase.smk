@@ -18,17 +18,17 @@ rule paraphrase:
         "long_read/sniffles/{sample}_{type}.vcf.log",
     benchmark:
         repeat("long_read/sniffles/{sample}_{type}.vcf.benchmark.tsv", config.get("sniffles", {}).get("benchmark_repeats", 1))
-    threads: config.get("sniffles", {}).get("threads", config["default_resources"]["threads"])
+    threads: config.get("paraphrase", {}).get("threads", config["default_resources"]["threads"])
     resources:
-        mem_mb=config.get("sniffles", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
-        mem_per_cpu=config.get("sniffles", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
-        partition=config.get("sniffles", {}).get("partition", config["default_resources"]["partition"]),
-        threads=config.get("sniffles", {}).get("threads", config["default_resources"]["threads"]),
-        time=config.get("sniffles", {}).get("time", config["default_resources"]["time"]),
+        mem_mb=config.get("paraphrase", {}).get("mem_mb", config["paraphrase_resources"]["mem_mb"]),
+        mem_per_cpu=config.get("paraphrase", {}).get("mem_per_cpu", config["paraphrase_resources"]["mem_per_cpu"]),
+        partition=config.get("paraphrase", {}).get("partition", config["paraphrase_resources"]["partition"]),
+        threads=config.get("paraphrase", {}).get("threads", config["paraphrase_resources"]["threads"]),
+        time=config.get("paraphrase", {}).get("time", config["paraphrase_resources"]["time"]),
     container:
-        config.get("sniffles", {}).get("container", config["default_container"])
+        config.get("paraphrase", {}).get("container", config["default_container"])
     message:
-        "{rule}: Calls SVs on {input.bam} with sniffles"
+        "{rule}: Calls SNVs on {input.bam} with paraphrase to resolve SNVs in gene families"
     script:
         "paraphrase --bam {input.bam} "
         "--reference {input.fasta} "
