@@ -1,6 +1,6 @@
-__author__ = "Nina Hollfelder"
-__copyright__ = "Copyright 2023, Nina Hollfelder"
-__email__ = "nina_hollfelder@scilifelab.uu.se"
+__author__ = "Magdalena Zarowiecki"
+__copyright__ = "Copyright 2023, Uppsala Universitet"
+__email__ = "magdalena.z@scilifelab.uu.se"
 __license__ = "GPL-3"
 
 
@@ -13,7 +13,6 @@ rule paraphrase:
     params:
         genome=config.get("paraphrase", {}).get("genome", ""),
         extra=config.get("paraphrase", {}).get("extra", ""),
-        
     log:
         "long_read/sniffles/{sample}_{type}.vcf.log",
     benchmark:
