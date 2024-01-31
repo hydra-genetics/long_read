@@ -32,7 +32,7 @@ rule paraphrase:
     script:
         "paraphrase --bam {input.bam} "
         "--reference {input.fasta} "
-        "--out {output.outfolder}
+        "--out {output.outfolder} "
         "{params.genome} "
         "{params.extra} " &> {log} "
 
