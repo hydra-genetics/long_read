@@ -10,7 +10,7 @@ rule paraphrase:
         fasta=config.get("paraphrase", {}).get("fasta", ""),
     output:
         outfolder="long_read/paraphrase/",
-        outfCR1="long_read/paraphrase/{sample}_{type}_vcf/{sample}_{type}_CR1_variants.vcf",
+        outfCR1="long_read/paraphrase/{sample}_{type}_vcfs/{sample}_{type}_CR1_variants.vcf",
     params:
         genome=config.get("paraphrase", {}).get("genome", ""),
         extra=config.get("paraphrase", {}).get("extra", ""),
