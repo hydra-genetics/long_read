@@ -15,9 +15,7 @@ rule paraphrase:
         genome=config.get("paraphrase", {}).get("genome", ""),
         extra=config.get("paraphrase", {}).get("extra", ""),
     log:
-        "long_read/sniffles/{sample}_{type}.vcf.log",
-    benchmark:
-        repeat("long_read/sniffles/{sample}_{type}.vcf.benchmark.tsv", config.get("sniffles", {}).get("benchmark_repeats", 1))
+        "long_read/paraphrase/{sample}_{type}.vcf.log",
     threads: config.get("paraphrase", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("paraphrase", {}).get("mem_mb", config["paraphrase_resources"]["mem_mb"]),
