@@ -38,16 +38,20 @@ rule paraphrase:
 
 
 rule paraphrase_merge_and_copy_vcf:
+
+    SAMPLE = get_samples(samples) # Example names
+    TYPES = get_unit_types(units, sample) # Example types
+
     input:
-        vcf_files = expand("long_read/paraphrase/{sample}_{type}_vcfs/{name}_{type}_{gene}_variants.vcf", name=WILDCARD_NAME, type=WILDCARD_TYPE, gene=WILDCARD_TYPE)
+        vcf_files = expand("long_read/paraphrase/{sample}_{type}_vcfs/{sample}_{type}_merged_variants.vcf", sample=SAMPLE, type=TYPES)
     output:
-        merged_vcf = "long_read/paraphrase/{name}_{type}_paraphrase.vcf.gz"
+        merged_vcf = "long_read/paraphrase/{sample}_{type}_paraphrase.vcf.gz"
     shell:
         """
-        bcftools concat -o {output.merged_vcf} -O v {input.vcf_files}
+        bcftools concat -o {output.merged_vcf} -O v {vcf_files}/*_variants.vcf
         bgzip {output.merged_vcf}
         """
 
 
-
+ #bcftools concat -o {output.merged_vcf} -O v {input.vcf_files}
 
