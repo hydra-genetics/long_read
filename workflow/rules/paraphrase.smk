@@ -41,7 +41,9 @@ rule paraphrase_merge_and_copy_vcf:
 
     SAMPLE = get_samples(samples) # Example names
     TYPES = get_unit_types(units, sample) # Example types
-
+    
+    # compile_paraphrase_file_list(wildcards)
+    
     input:
         vcf_files = expand("long_read/paraphrase/{sample}_{type}_vcfs/{sample}_{type}_merged_variants.vcf", sample=SAMPLE, type=TYPES)
     output:
