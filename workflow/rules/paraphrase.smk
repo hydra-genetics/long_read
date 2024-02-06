@@ -35,3 +35,19 @@ rule paraphrase:
         "{params.extra} &> {log} "
 
 # paraphase --bam /bam/HG002-rep4_m84011_220902_175841_s1.hifi_reads.bam -r /reference/homo_sapiens.fasta --out /paraphrase/ --genome 38 -g smn1,CR1,AMY1A,CTAG1A,BOLA2
+
+
+rule paraphrase_merge_and_copy_vcf:
+    input:
+        vcf_files = expand("long_read/paraphrase/{sample}_{type}_vcfs/{name}_{type}_{gene}_variants.vcf", name=WILDCARD_NAME, type=WILDCARD_TYPE, gene=WILDCARD_TYPE)
+    output:
+        merged_vcf = "long_read/paraphrase/{name}_{type}_paraphrase.vcf.gz"
+    shell:
+        """
+        bcftools concat -o {output.merged_vcf} -O v {input.vcf_files}
+        bgzip {output.merged_vcf}
+        """
+
+
+
+
