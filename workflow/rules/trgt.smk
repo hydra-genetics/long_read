@@ -1,3 +1,9 @@
+__author__ = "Magdalena Zarowiecki"
+__copyright__ = "Copyright 2023, Uppsala universitet"
+__email__ = "magdalena.z@scilifelab.uu.se"
+__license__ = "GPL-3"
+
+
 ruleorder: trgt_genotype > bgzip_vcf
 
 
@@ -38,4 +44,6 @@ rule trgt_coverage_dropouts:
     conda: "envs/tandem-genotypes.yaml"
     message: "Executing {rule}: Identify coverage dropouts in {input.bed} regions in {input.bam}."
     shell: "(python3 workflow/scripts/check_trgt_coverage.py {input.bed} {input.bam} > {output}) > {log} 2>&1"
+
+# Originates from https://github.com/PacificBiosciences/pb-human-wgs-workflow-snakemake/blob/main/rules/sample_trgt.smk
 
