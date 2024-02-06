@@ -1,8 +1,7 @@
 rule hifiasm:
     input:
         fasta=[
-            "reads/HiFi_dataset_01.fasta.gz",
-            "reads/HiFi_dataset_02.fasta.gz",
+            query=lambda wildcards: get_hifiasm_query(wildcards),
         ],
     # optional
     # hic1="reads/Hi-C_dataset_R1.fastq.gz",
