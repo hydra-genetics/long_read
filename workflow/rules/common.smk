@@ -73,6 +73,7 @@ def pbmm2_input(wildcards):
     return query_files
 
 
+
 def compile_output_file_list(wildcards):
     outdir = pathlib.Path(output_spec.get("directory", "./"))
     output_files = []
@@ -92,6 +93,30 @@ def compile_output_file_list(wildcards):
         for op in outputpaths:
             output_files.append(outdir / Path(op))
     return output_files
+
+
+
+def compile_paraphrase_file_list(wildcards):
+    outdir = pathlib.Path("long_read/paraphrase/")
+    output_files = []
+
+    for f in output_spec["files"]:
+        # Please remember to add any additional values down below
+        # that the output strings should be formatted with.
+        outputpaths = set(
+            [
+                f["output"].format(sample=sample, type=unit_type, flowcell=flowcell, barcode=barcode)
+                for sample in get_samples(samples)
+                for unit_type in get_unit_types(units, sample)
+                for flowcell in set([u.flowcell for u in units.loc[(sample, unit_type)].dropna().itertuples()])
+                for barcode in set([u.barcode for u in units.loc[(sample, unit_type)].dropna().itertuples()])
+            ]
+        )
+        for op in outputpaths:
+            output_files.append(outdir / Path(op))
+    return output_files
+
+
 
 
 def generate_copy_rules(output_spec):
@@ -167,6 +192,8 @@ def get_hifiasm_query(wildcards):
         raise ValueError("Neither fastq or bam file configured for {wildcard.sample}")
     print(query_files)
     return query_files
+
+
 
 
 generate_copy_rules(output_spec)
