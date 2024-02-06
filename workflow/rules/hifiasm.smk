@@ -1,3 +1,9 @@
+__author__ = "Magdalena Zarowiecki"
+__copyright__ = "Copyright 2023, Uppsala universitet"
+__email__ = "magdalena.z@scilifelab.uu.se"
+__license__ = "GPL-3"
+
+
 rule hifiasm:
     input:
         fasta=[
@@ -31,3 +37,5 @@ rule hifiasm:
         mem_mb=1024,
     wrapper:
         "v3.3.6/bio/hifiasm"
+
+# Dervied from https://snakemake-wrappers.readthedocs.io/en/stable/wrappers/hifiasm.html
