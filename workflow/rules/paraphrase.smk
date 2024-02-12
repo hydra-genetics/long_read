@@ -22,6 +22,8 @@ rule paraphrase:
         extra=config.get("paraphrase", {}).get("extra", ""),
     log:
         "long_read/paraphrase/{sample}_{type}.vcf.log",
+    benchmark:
+        repeat("long_read/paraphrase/{sample}_{type}.out.benchmark.tsv", config.get("paraphrase", {}).get("benchmark_repeats", 1))
     threads: config.get("paraphrase", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("paraphrase", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
