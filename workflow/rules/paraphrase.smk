@@ -3,9 +3,13 @@ __copyright__ = "Copyright 2023, Uppsala Universitet"
 __email__ = "magdalena.z@scilifelab.uu.se"
 __license__ = "GPL-3"
 
+# compile_paraphrase_file_list(wildcards)
+GENE = ["smn1","CR1","AMY1A","CTAG1A","BOLA2"]
+SAMPLE = get_samples(samples) # Example names
+TYPES = get_unit_types(units, sample) # Example types
+
 
 rule paraphrase:
-    GENE = ["smn1","CR1","AMY1A","CTAG1A","BOLA2"]
     input:
         bam="long_read/minimap2/{sample}_{type}.bam",
         fasta=config.get("paraphrase", {}).get("fasta", ""),
@@ -40,13 +44,6 @@ rule paraphrase:
 
 
 rule paraphrase_merge_and_copy_vcf:
-
-    SAMPLE = get_samples(samples) # Example names
-    TYPES = get_unit_types(units, sample) # Example types
-    GENE = ["smn1","CR1","AMY1A","CTAG1A","BOLA2"]
-    
-    # compile_paraphrase_file_list(wildcards)
-    
     input:
         vcf_files="long_read/paraphrase/{sample}_{type}_vcfs/{sample}_{type}_CR1_variants.vcf"
         #vcf_files = expand("long_read/paraphrase/{{sample}}_{{type}}_vcfs/{{sample}}_{{type}}_{gene}_variants.vcf", gene=GENE)
