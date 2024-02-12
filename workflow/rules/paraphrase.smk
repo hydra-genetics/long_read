@@ -53,7 +53,7 @@ rule paraphrase_merge_and_copy_vcf:
         merged_vcf = "long_read/paraphrase/{sample}_{type}_paraphrase.vcf.gz"
     shell:
         """
-        bcftools concat -o {output.merged_vcf} -O v {vcf_files}
+        bcftools concat -o {output.merged_vcf} -O v {input.vcf_files}
         bgzip {output.merged_vcf}
         """
 
