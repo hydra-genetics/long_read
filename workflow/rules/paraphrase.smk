@@ -5,12 +5,14 @@ __license__ = "GPL-3"
 
 
 rule paraphrase:
+    GENE = ["smn1","CR1","AMY1A","CTAG1A","BOLA2"]
     input:
         bam="long_read/minimap2/{sample}_{type}.bam",
         fasta=config.get("paraphrase", {}).get("fasta", ""),
     output:
         outfolder="long_read/paraphrase/",
-        outfCR1="long_read/paraphrase/{sample}_{type}_vcfs/{sample}_{type}_CR1_variants.vcf",
+        #outfCR1="long_read/paraphrase/{sample}_{type}_vcfs/{sample}_{type}_CR1_variants.vcf",
+        outfCR1 = expand("long_read/paraphrase/{{sample}}_{{type}}_vcfs/{{sample}}_{{type}}_{gene}_variants.vcf", gene=GENE),
     params:
         genome=config.get("paraphrase", {}).get("genome", ""),
         extra=config.get("paraphrase", {}).get("extra", ""),
