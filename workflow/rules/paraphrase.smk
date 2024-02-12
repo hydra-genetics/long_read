@@ -35,7 +35,7 @@ rule paraphrase:
         config.get("paraphrase", {}).get("container", config["default_container"])
     message:
         "{rule}: Calls SNVs on {input.bam} with paraphrase to resolve SNVs in gene families"
-    script:
+    shell:
         "paraphrase --bam {input.bam} "
         "--reference {input.fasta} "
         "--out {params.outfolder} "
