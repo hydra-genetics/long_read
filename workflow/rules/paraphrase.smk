@@ -5,8 +5,8 @@ __license__ = "GPL-3"
 
 # compile_paraphrase_file_list(wildcards)
 GENE = ["smn1","CR1","AMY1A","CTAG1A","BOLA2"]
-SAMPLE = get_samples(samples) # Example names
-TYPES = get_unit_types(units, samples) # Example types
+#SAMPLE = get_samples(samples) # Example names
+#TYPES = get_unit_types(units, samples) # Example types
 
 
 rule paraphrase:
