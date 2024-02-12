@@ -10,6 +10,7 @@ include: "rules/pbmm2.smk"
 include: "rules/minimap2.smk"
 include: "rules/pbsv.smk"
 include: "rules/sniffles.smk"
+include: "rules/paraphrase.smk"
 
 
 report: "report/workflow.rst"
