@@ -11,8 +11,8 @@ rule paraphrase:
         fasta=config.get("paraphrase", {}).get("fasta", ""),
     output:
         outfolder="long_read/paraphrase/",
-        #outfCR1="long_read/paraphrase/{sample}_{type}_vcfs/{sample}_{type}_CR1_variants.vcf",
-        outfCR1 = expand("long_read/paraphrase/{{sample}}_{{type}}_vcfs/{{sample}}_{{type}}_{gene}_variants.vcf", gene=GENE),
+        outfCR1="long_read/paraphrase/{sample}_{type}_vcfs/{sample}_{type}_CR1_variants.vcf",
+        #outfCR1 = expand("long_read/paraphrase/{{sample}}_{{type}}_vcfs/{{sample}}_{{type}}_{gene}_variants.vcf", gene=GENE),
     params:
         genome=config.get("paraphrase", {}).get("genome", ""),
         extra=config.get("paraphrase", {}).get("extra", ""),
@@ -48,7 +48,8 @@ rule paraphrase_merge_and_copy_vcf:
     # compile_paraphrase_file_list(wildcards)
     
     input:
-        vcf_files = expand("long_read/paraphrase/{{sample}}_{{type}}_vcfs/{{sample}}_{{type}}_{gene}_variants.vcf", gene=GENE)
+        vcf_files="long_read/paraphrase/{sample}_{type}_vcfs/{sample}_{type}_CR1_variants.vcf"
+        #vcf_files = expand("long_read/paraphrase/{{sample}}_{{type}}_vcfs/{{sample}}_{{type}}_{gene}_variants.vcf", gene=GENE)
     output:
         merged_vcf = "long_read/paraphrase/{sample}_{type}_paraphrase.vcf.gz"
     shell:
