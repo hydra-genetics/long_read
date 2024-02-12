@@ -14,12 +14,12 @@ rule paraphrase:
         bam="long_read/minimap2/{sample}_{type}.bam",
         fasta=config.get("paraphrase", {}).get("fasta", ""),
     output:
-        outfolder=directory("long_read/paraphrase/"),
         outfCR1="long_read/paraphrase/{sample}_{type}_vcfs/{sample}_{type}_CR1_variants.vcf",
         #outfCR1 = expand("long_read/paraphrase/{{sample}}_{{type}}_vcfs/{{sample}}_{{type}}_{gene}_variants.vcf", gene=GENE),
     params:
         genome=config.get("paraphrase", {}).get("genome", ""),
         extra=config.get("paraphrase", {}).get("extra", ""),
+        outfolder=directory("long_read/paraphrase/"),
     log:
         "long_read/paraphrase/{sample}_{type}.vcf.log",
     benchmark:
@@ -38,7 +38,7 @@ rule paraphrase:
     script:
         "paraphrase --bam {input.bam} "
         "--reference {input.fasta} "
-        "--out {output.outfolder} "
+        "--out {params.outfolder} "
         "{params.genome} "
         "{params.extra} &> {log} "
 
