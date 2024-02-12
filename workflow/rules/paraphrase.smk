@@ -24,11 +24,11 @@ rule paraphrase:
         "long_read/paraphrase/{sample}_{type}.vcf.log",
     threads: config.get("paraphrase", {}).get("threads", config["default_resources"]["threads"])
     resources:
-        mem_mb=config.get("paraphrase", {}).get("mem_mb", config["paraphrase_resources"]["mem_mb"]),
-        mem_per_cpu=config.get("paraphrase", {}).get("mem_per_cpu", config["paraphrase_resources"]["mem_per_cpu"]),
-        partition=config.get("paraphrase", {}).get("partition", config["paraphrase_resources"]["partition"]),
-        threads=config.get("paraphrase", {}).get("threads", config["paraphrase_resources"]["threads"]),
-        time=config.get("paraphrase", {}).get("time", config["paraphrase_resources"]["time"]),
+        mem_mb=config.get("paraphrase", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
+        mem_per_cpu=config.get("paraphrase", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
+        partition=config.get("paraphrase", {}).get("partition", config["default_resources"]["partition"]),
+        threads=config.get("paraphrase", {}).get("threads", config["default_resources"]["threads"]),
+        time=config.get("paraphrase", {}).get("time", config["default_resources"]["time"]),
     container:
         config.get("paraphrase", {}).get("container", config["default_container"])
     message:
