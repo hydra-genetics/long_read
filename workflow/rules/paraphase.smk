@@ -36,7 +36,7 @@ rule paraphase:
     message:
         "{rule}: Calls SNVs on {input.bam} with paraphase to resolve SNVs in gene families"
     shell:
-        "/opt/conda/envs/hydra/bin/paraphase --bam {input.bam} "
+        "paraphase --bam {input.bam} "
         "--reference {input.fasta} "
         "--out {params.outfolder} "
         "{params.genome} "
