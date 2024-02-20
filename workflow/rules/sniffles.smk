@@ -9,7 +9,8 @@ rule sniffles:
         bam="long_read/minimap2/{sample}_{type}.bam",
         fasta=config.get("reference", {}).get("fasta", ""),
     output:
-        vcf="long_read/sniffles/{sample}_{type}.vcf",
+        vcf="long_read/sniffles/{sample}_{type}.vcf.gz",
+        snf="long_read/sniffles/{sample}_{type}.snf",
     params:
         extra=config.get("sniffles", {}).get("extra", ""),
         non_germline=config.get("sniffles", {}).get("non_germline", ""),
@@ -34,4 +35,5 @@ rule sniffles:
         "-t {threads} "
         "{params.non_germline} "
         "{params.extra} "
-        "-v {output.vcf} &> {log} "
+        "--vcf {output.vcf} "
+        "--snf {output.vcf} &> {log} "
