@@ -51,6 +51,17 @@ rule paraphase_merge_and_copy_vcf:
         #vcf_files = expand("long_read/paraphase/{{sample}}_{{type}}_vcfs/{{sample}}_{{type}}_{gene}_variants.vcf", gene=GENE)
     output:
         merged_vcf = "long_read/paraphase/{sample}_{type}_paraphase.vcf.gz"
+    threads: config.get("paraphase", {}).get("threads", config["default_resources"]["threads"])
+    resources:
+        mem_mb=config.get("paraphase", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
+        mem_per_cpu=config.get("paraphase", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
+        partition=config.get("paraphase", {}).get("partition", config["default_resources"]["partition"]),
+        threads=config.get("paraphase", {}).get("threads", config["default_resources"]["threads"]),
+        time=config.get("paraphase", {}).get("time", config["default_resources"]["time"]),
+    container:
+        config.get("paraphase", {}).get("container", config["default_container"])
+    message:
+        "{rule}: Merging paraphrase output"
     shell:
         """
         bcftools concat -o {output.merged_vcf} -O v {input.vcf_files}
