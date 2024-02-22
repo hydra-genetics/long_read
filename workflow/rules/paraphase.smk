@@ -14,16 +14,16 @@ rule paraphase:
         bam="long_read/minimap2/{sample}_{type}.bam",
         fasta=config.get("paraphase", {}).get("fasta", ""),
     output:
-        outfCR1="long_read/paraphase/{sample}_{type}_vcfs/{sample}_{type}_CR1_variants.vcf",
-        #outfCR1 = expand("long_read/paraphase/{{sample}}_{{type}}_vcfs/{{sample}}_{{type}}_{gene}_variants.vcf", gene=GENE),
+        outfCR1="long_read/paraphase/{sample}-{type}_vcfs/{sample}_{type}_CR1_variants.vcf",
+        #outfCR1 = expand("long_read/paraphase/{{sample}}-{{type}}_vcfs/{{sample}}_{{type}}_{gene}_variants.vcf", gene=GENE),
     params:
         genome=config.get("paraphase", {}).get("genome", ""),
         extra=config.get("paraphase", {}).get("extra", ""),
         outfolder=directory("long_read/paraphase/"),
     log:
-        "long_read/paraphase/{sample}_{type}.vcf.log",
+        "long_read/paraphase/{sample}-{type}.vcf.log",
     benchmark:
-        repeat("long_read/paraphase/{sample}_{type}.out.benchmark.tsv", config.get("paraphase", {}).get("benchmark_repeats", 1))
+        repeat("long_read/paraphase/{sample}-{type}.out.benchmark.tsv", config.get("paraphase", {}).get("benchmark_repeats", 1))
     threads: config.get("paraphase", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("paraphase", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -50,12 +50,12 @@ rule paraphase:
 
 rule paraphase_merge_and_copy_vcf:
     input:
-        vcf_files="long_read/paraphase/{sample}_{type}_vcfs/{sample}_{type}_CR1_variants.vcf"
-        #vcf_files = expand("long_read/paraphase/{{sample}}_{{type}}_vcfs/{{sample}}_{{type}}_{gene}_variants.vcf", gene=GENE)
+        vcf_files="long_read/paraphase/{sample}-{type}_vcfs/{sample}_{type}_CR1_variants.vcf"
+        #vcf_files = expand("long_read/paraphase/{{sample}}-{{type}}_vcfs/{{sample}}-{{type}}_{gene}_variants.vcf", gene=GENE)
     params:
-        variant_files="long_read/paraphase/{sample}_{type}_vcfs/*_variants.vcf.gz"
+        variant_files="long_read/paraphase/{sample}-{type}_vcfs/*_variants.vcf.gz"
     output:
-        merged_vcf = "long_read/paraphase/{sample}_{type}_paraphase.vcf.gz"
+        merged_vcf = "long_read/paraphase/{sample}-{type}_paraphase.vcf.gz"
     threads: config.get("paraphase", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("paraphase", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -69,8 +69,8 @@ rule paraphase_merge_and_copy_vcf:
         "{rule}: Merging paraphrase output"
     shell:
         """
-        find long_read/paraphase/{sample}_{type}_vcfs/*_variants.vcf -type f -exec bgzip {} \;
-        find long_read/paraphase/{sample}_{type}_vcfs/*_variants.vcf.gz -type f -name '*_variants.vcf.gz' -exec bcftools index {} \;
+        find long_read/paraphase/{sample}-{type}_vcfs/*_variants.vcf -type f -exec bgzip {} \;
+        find long_read/paraphase/{sample}-{type}_vcfs/*_variants.vcf.gz -type f -name '*_variants.vcf.gz' -exec bcftools index {} \;
         bcftools concat  -O v {params.variant_files} | bcftools annotate --header reference/vcf_chromosome_header.vcf | bcftools sort  -Oz -o {output.merged_vcf} 
         """
 
