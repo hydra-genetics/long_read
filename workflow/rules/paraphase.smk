@@ -36,11 +36,14 @@ rule paraphase:
     message:
         "{rule}: Calls SNVs on {input.bam} with paraphase to resolve SNVs in gene families"
     shell:
-        "paraphase --bam {input.bam} "
-        "--reference {input.fasta} "
-        "--out {params.outfolder} "
-        "{params.genome} "
-        "{params.extra} &> {log} "
+        """
+        paraphase --bam {input.bam} \
+        --reference {input.fasta} \
+        --out {params.outfolder} \
+        {params.genome} \
+        {params.extra} &> {log}; \
+        sleep 10
+        """
 
 # paraphase --bam /bam/HG002-rep4_m84011_220902_175841_s1.hifi_reads.bam -r /reference/homo_sapiens.fasta --out /paraphase/ --genome 38 -g smn1,CR1,AMY1A,CTAG1A,BOLA2
 
