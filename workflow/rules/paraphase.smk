@@ -70,7 +70,7 @@ rule paraphase_merge_and_copy_vcf:
     shell:
         """
         find long_read/paraphase/{sample}_{type}_vcfs/*_variants.vcf -type f -exec bgzip {} \;
-        find long_read/paraphase/sample}_{type}_vcfs/_variants.vcf.gz -type f -name '*_variants.vcf.gz' -exec bcftools index {} \;
+        find long_read/paraphase/{sample}_{type}_vcfs/_variants.vcf.gz -type f -name '*_variants.vcf.gz' -exec bcftools index {} \;
         bcftools concat  -O v {params.variant_files} | bcftools annotate --header reference/vcf_chromosome_header.vcf | bcftools sort  -Oz -o {output.merged_vcf} 
         """
 
