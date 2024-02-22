@@ -42,7 +42,8 @@ rule paraphase:
         --out {params.outfolder} \
         {params.genome} \
         {params.extra} &> {log}; \
-        sleep 10
+        sleep 3; \
+        touch long_read/paraphase/{wildcards.sample}_{wildcards.type}_vcfs/{wildcards.sample}_{wildcards.type}_CR1_variants.vcf 
         """
 
 rule paraphase_merge_and_copy_vcf:
