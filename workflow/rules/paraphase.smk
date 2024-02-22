@@ -67,10 +67,7 @@ rule paraphase_merge_and_copy_vcf:
         "{rule}: Merging paraphrase output"
     shell:
         """
-        bcftools concat -o {output.merged_vcf} -O v {input.vcf_files}
-        bgzip {output.merged_vcf}
+        bcftools concat  -O v {input.vcf_files} | bgzip > {output.merged_vcf} 
         """
 
-
- #bcftools concat -o {output.merged_vcf} -O v {input.vcf_files}
 
