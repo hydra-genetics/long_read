@@ -53,7 +53,7 @@ rule paraphase_merge_and_copy_vcf:
         vcf_files="long_read/paraphase/{sample}_{type}_vcfs/{sample}_{type}_CR1_variants.vcf"
         #vcf_files = expand("long_read/paraphase/{{sample}}_{{type}}_vcfs/{{sample}}_{{type}}_{gene}_variants.vcf", gene=GENE)
     params:
-        variant_files="long_read/paraphase/{sample}_{type}_vcfs/*_variants.vcf"
+        variant_files="long_read/paraphase/{sample}_{type}_vcfs/*_variants.vcf.gz"
     output:
         merged_vcf = "long_read/paraphase/{sample}_{type}_paraphase.vcf.gz"
     threads: config.get("paraphase", {}).get("threads", config["default_resources"]["threads"])
@@ -70,7 +70,7 @@ rule paraphase_merge_and_copy_vcf:
     shell:
         """
         find long_read/paraphase/{sample}_{type}_vcfs/*_variants.vcf -type f -exec bgzip {} \;
-        find long_read/paraphase/{sample}_{type}_vcfs/_variants.vcf.gz -type f -name '*_variants.vcf.gz' -exec bcftools index {} \;
+        find long_read/paraphase/{sample}_{type}_vcfs/*_variants.vcf.gz -type f -name '*_variants.vcf.gz' -exec bcftools index {} \;
         bcftools concat  -O v {params.variant_files} | bcftools annotate --header reference/vcf_chromosome_header.vcf | bcftools sort  -Oz -o {output.merged_vcf} 
         """
 
