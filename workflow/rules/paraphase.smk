@@ -72,7 +72,8 @@ rule paraphase_merge_and_copy_vcf:
         touch {input.vcf_file};
         find long_read/paraphase/{wildcards.sample}_{wildcards.type}_vcfs/*_variants.vcf -type f -exec bgzip -f {{}} \\;
         find long_read/paraphase/{wildcards.sample}_{wildcards.type}_vcfs/*_variants.vcf.gz -type f -exec bcftools index {{}} \\;
-        bcftools concat -a -O v {params.variant_files} | bcftools annotate --header {input.vcf_header}  &> {log};
+        bcftools concat -a -O v {params.variant_files} | bcftools annotate --header-lines {input.vcf_header}  &> {log};
+        bcftools --version &> {log};
         touch {output.merged_vcf};
         """
 
