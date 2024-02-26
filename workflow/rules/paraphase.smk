@@ -52,6 +52,8 @@ rule paraphase_merge_and_copy_vcf:
         #vcf_files = expand("long_read/paraphase/{{sample}}_{{type}}_vcfs/{{sample}}_{{type}}_{gene}_variants.vcf", gene=GENE)
     params:
         variant_files="long_read/paraphase/{sample}_{type}_vcfs/*_variants.vcf.gz"
+    log:
+        "long_read/paraphase/{sample}-{type}.merge_and_copy_vcf.log",
     output:
         merged_vcf = "long_read/paraphase/{sample}_{type}_paraphase.vcf.gz"
     threads: config.get("paraphase", {}).get("threads", config["default_resources"]["threads"])
