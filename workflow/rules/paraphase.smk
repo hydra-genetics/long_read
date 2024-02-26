@@ -68,6 +68,7 @@ rule paraphase_merge_and_copy_vcf:
     shell:
         """
         touch {input.vcf_file}
+        find long_read/paraphase/{wildcards.sample}_{wildcards.type}_vcfs/*_variants.vcf -type f -exec bgzip -f {{}} \\;
         touch {output.merged_vcf}
         """
 
