@@ -68,9 +68,9 @@ rule paraphase_merge_and_copy_vcf:
     shell:
         """
         find long_read/paraphase/{wildcards.sample}_{wildcards.type}_vcfs/*_variants.vcf -type f -exec bgzip -f {{}} \\;
-        find long_read/paraphase/{wildcards.sample}_{wildcards.type}_vcfs/*_variants.vcf.gz -type f -name '*_variants.vcf.gz' -exec bcftools index {{}} \\ &> {log}; 
-        bcftools concat -a -O v {params.variant_files} | bcftools annotate --header reference/vcf_chromosome_header.vcf | bcftools sort -Oz -o {output.merged_vcf} &> {log}
         touch input.vcf_file
         """
 
+        #find long_read/paraphase/{wildcards.sample}_{wildcards.type}_vcfs/*_variants.vcf.gz -type f -name '*_variants.vcf.gz' -exec bcftools index {{}} \\ &> {log}; 
+        #bcftools concat -a -O v {params.variant_files} | bcftools annotate --header reference/vcf_chromosome_header.vcf | bcftools sort -Oz -o {output.merged_vcf} &> {log}
 
