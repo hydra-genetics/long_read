@@ -49,8 +49,7 @@ rule paraphase:
 rule paraphase_merge_and_copy_vcf:
     input:
         vcf_file="long_read/paraphase/{sample}_{type}_vcfs/{sample}_{type}_CR1_variants.vcf",
-        vcf_header=config.get("paraphase", {}).get("vcf_header", ""),
-        #vcf_files = expand("long_read/paraphase/{{sample}}_{{type}}_vcfs/{{sample}}_{{type}}_{gene}_variants.vcf", gene=GENE)
+        vcf_header=config.get("paraphase_merge_and_copy_vcf", {}).get("vcf_header", ""),
     params:
         variant_files="long_read/paraphase/{sample}_{type}_vcfs/*_variants.vcf.gz"
     log:
@@ -70,11 +69,11 @@ rule paraphase_merge_and_copy_vcf:
         "{rule}: Merging paraphrase output"
     shell:
         """
-        touch {input.vcf_file}
+        touch {input.vcf_file};
         find long_read/paraphase/{wildcards.sample}_{wildcards.type}_vcfs/*_variants.vcf -type f -exec bgzip -f {{}} \\;
         find long_read/paraphase/{wildcards.sample}_{wildcards.type}_vcfs/*_variants.vcf.gz -type f -exec bcftools index {{}} \\;
         bcftools concat -a -O v {params.variant_files} | bcftools annotate --header reference/vcf_chromosome_header.vcf | bcftools sort -Oz -o {output.merged_vcf} &> {log};
-        touch {output.merged_vcf}
+        touch {output.merged_vcf};
         """
 
         # find long_read/paraphase/{wildcards.sample}_{wildcards.type}_vcfs/*_variants.vcf -type f -exec bgzip -f {{}} \\;
