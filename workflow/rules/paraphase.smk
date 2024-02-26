@@ -48,7 +48,8 @@ rule paraphase:
 
 rule paraphase_merge_and_copy_vcf:
     input:
-        vcf_file="long_read/paraphase/{sample}_{type}_vcfs/{sample}_{type}_CR1_variants.vcf"
+        vcf_file="long_read/paraphase/{sample}_{type}_vcfs/{sample}_{type}_CR1_variants.vcf",
+        vcf_header=config.get("paraphase", {}).get("vcf_header", ""),
         #vcf_files = expand("long_read/paraphase/{{sample}}_{{type}}_vcfs/{{sample}}_{{type}}_{gene}_variants.vcf", gene=GENE)
     params:
         variant_files="long_read/paraphase/{sample}_{type}_vcfs/*_variants.vcf.gz"
