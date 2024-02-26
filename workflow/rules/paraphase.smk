@@ -67,7 +67,8 @@ rule paraphase_merge_and_copy_vcf:
         "{rule}: Merging paraphrase output"
     shell:
         """
-        touch input.vcf_file
+        touch {input.vcf_file}
+        touch {output.merged_vcf}
         """
 
         # find long_read/paraphase/{wildcards.sample}_{wildcards.type}_vcfs/*_variants.vcf -type f -exec bgzip -f {{}} \\;
