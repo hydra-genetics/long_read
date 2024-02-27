@@ -70,8 +70,8 @@ rule paraphase_merge_and_copy_vcf:
     shell:
         'sh -c "'
         "(touch {input.vcf_file} && "
-        "find long_read/paraphase/{wildcards.sample}_{wildcards.type}_vcfs/*_variants.vcf -type f -exec bgzip -f {{}} \\ && "
-        "find long_read/paraphase/{wildcards.sample}_{wildcards.type}_vcfs/*_variants.vcf.gz -type f -exec bcftools index {{}} \\ && "
+        "find long_read/paraphase/{wildcards.sample}_{wildcards.type}_vcfs/*_variants.vcf -type f -exec bgzip -f {{}} \\; "
+        "find long_read/paraphase/{wildcards.sample}_{wildcards.type}_vcfs/*_variants.vcf.gz -type f -exec bcftools index {{}} \\; "
         "bcftools concat -a -O v {params.variant_files} | bcftools annotate --header-lines {input.vcf_header} | bcftools sort -Oz -o {output.merged_vcf} && "
         "touch {output.merged_vcf} ) &> {log} "
         ' " '
