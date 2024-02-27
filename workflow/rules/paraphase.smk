@@ -15,6 +15,7 @@ rule paraphase:
         fasta=config.get("paraphase", {}).get("fasta", ""),
     output:
         outfCR1="long_read/paraphase/{sample}_{type}_vcfs/{sample}_{type}_CR1_variants.vcf",
+        merged_vcf = "long_read/paraphase/{sample}_{type}_paraphase.vcf.gz",
         #outfCR1 = expand("long_read/paraphase/{{sample}}_{{type}}_vcfs/{{sample}}_{{type}}_{gene}_variants.vcf", gene=GENE),
     params:
         genome=config.get("paraphase", {}).get("genome", ""),
