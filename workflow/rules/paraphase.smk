@@ -38,7 +38,7 @@ rule paraphase:
         "{rule}: Calls SNVs on {input.bam} with paraphase to resolve SNVs in gene families"
 
     wrapper:
-        "ppp/bio/paraphase"
+        "/home/magza477/magz_testing/snakemake-wrappers/bio/paraphase"
 
 
 
