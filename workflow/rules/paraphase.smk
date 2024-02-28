@@ -14,8 +14,6 @@ rule paraphase:
         bam="long_read/minimap2/{sample}_{type}.bam",
         fasta=config.get("paraphase", {}).get("fasta", ""),
     output:
-        outres=directory("long_read/paraphase/{sample}_{type}_vcfs/"),
-        outfCR1="long_read/paraphase/{sample}_{type}_vcfs/{sample}_{type}_CR1_variants.vcf",
         merged_vcf = "long_read/paraphase/{sample}_{type}_paraphase.vcf.gz",
     params:
         genome=config.get("paraphase", {}).get("genome", ""),
