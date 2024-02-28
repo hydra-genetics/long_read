@@ -36,7 +36,6 @@ rule paraphase:
         config.get("paraphase", {}).get("container", config["default_container"])
     message:
         "{rule}: Calls SNVs on {input.bam} with paraphase to resolve SNVs in gene families"
-
     wrapper:
         "file:///beegfs-storage/projects/wp3/nobackup/Workspace/magz_testing/snakemake-wrappers/bio/paraphase"
 
