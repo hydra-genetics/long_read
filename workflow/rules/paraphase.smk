@@ -13,6 +13,7 @@ rule paraphase:
     input:
         bam="long_read/minimap2/{sample}_{type}.bam",
         fasta=config.get("paraphase", {}).get("fasta", ""),
+        vcf_header=config.get("paraphase_merge_and_copy_vcf", {}).get("vcf_header", ""),
     output:
         merged_vcf = "long_read/paraphase/{sample}_{type}_paraphase.vcf.gz",
     params:
