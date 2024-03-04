@@ -17,7 +17,7 @@ elif basecaller == "gpu":
             configfile=config["guppy_basecaller_gpu"]["configuration_file"],
         output:
             seqsum="long_read/guppy/sequencing_summary.txt"
-            fastq=
+            #fastq=
         params:
             extra=config.get("guppy_basecaller_gpu", {}).get("extra", ""),
             gpu="cuda:0",
@@ -54,7 +54,7 @@ elif basecaller == "cpu":
             configfile=config["guppy_basecaller_cpu"]["configuration_file"],
         output:
             seqsum="long_read/guppy/sequencing_summary.txt",
-            fastq= #
+            #fastq= #
         params:
             extra=config.get("guppy_basecaller_cpu", {}).get("extra", ""),
             num_caller=config.get("guppy_basecaller_cpu", {}).get("num_callers", "1"),
