@@ -7,11 +7,10 @@ __license__ = "GPL-3"
 rule hifiasm:
     input:
         fasta=[
-            query=lambda wildcards: get_hifiasm_query(wildcards),
+            "reads/HiFi_dataset_01.fasta.gz",
+            "reads/HiFi_dataset_02.fasta.gz",
         ],
     # optional
-    # hic1="reads/Hi-C_dataset_R1.fastq.gz",
-    # hic2="reads/Hi-C_dataset_R2.fastq.gz",
     output:
         multiext(
             "hifiasm/{sample}.",
