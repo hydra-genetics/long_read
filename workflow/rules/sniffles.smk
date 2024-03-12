@@ -14,7 +14,6 @@ rule sniffles:
         snf="long_read/sniffles/{sample}_{type}.snf",
     params:
         extra=config.get("sniffles", {}).get("extra", ""),
-        non_germline=config.get("sniffles", {}).get("non_germline", ""),
     log:
         "long_read/sniffles/{sample}_{type}.vcf.log",
     benchmark:
@@ -34,7 +33,6 @@ rule sniffles:
         "echo \"sniffles -i {input.bam} "
         "--reference {input.fasta} "
         "-t {threads} "
-        "{params.non_germline} "
         "{params.extra} "
         "--vcf {output.vcf} "
-        "--snf {output.snf} \” &> {log} "
+        "--snf {output.snf} \” &> log "
