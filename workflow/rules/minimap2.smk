@@ -38,5 +38,12 @@ rule minimap2_index:
         bam="long_read/minimap2/{sample}_{type}.bam",
     output:
         bai="long_read/minimap2/{sample}_{type}.bai",
+    threads: config.get("minimap2", {}).get("threads", config["default_resources"]["threads"])
+    resources:
+        mem_mb=config.get("minimap2", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
+        mem_per_cpu=config.get("minimap2", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
+        partition=config.get("minimap2", {}).get("partition", config["default_resources"]["partition"]),
+        threads=config.get("minimap2", {}).get("threads", config["default_resources"]["threads"]),
+        time=config.get("minimap2", {}).get("time", config["default_resources"]["time"]),
     shell:
         "samtools index {input.bam}"
