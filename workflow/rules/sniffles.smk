@@ -29,7 +29,7 @@ rule sniffles:
         config.get("sniffles", {}).get("container", config["default_container"])
     message:
         "{rule}: Calls SVs on {input.bam} with sniffles"
-    script:
+    shell:
         "echo sniffles -i {input.bam} "
         "--reference {input.fasta} "
         "-t {threads} "
