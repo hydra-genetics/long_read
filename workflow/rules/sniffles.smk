@@ -31,10 +31,10 @@ rule sniffles:
     message:
         "{rule}: Calls SVs on {input.bam} with sniffles"
     script:
-        "sniffles -i {input.bam} "
+        "echo \"sniffles -i {input.bam} "
         "--reference {input.fasta} "
         "-t {threads} "
         "{params.non_germline} "
         "{params.extra} "
         "--vcf {output.vcf} "
-        "--snf {output.snf} &> {log} "
+        "--snf {output.snf} \” &> {log} "
