@@ -38,6 +38,8 @@ rule minimap2_index:
         bam="long_read/minimap2/{sample}_{type}.bam",
     output:
         bai="long_read/minimap2/{sample}_{type}.bai",
+    log:
+        "long_read/minimap2/{sample}_{type}.bamindex.log",
     threads: config.get("minimap2", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("minimap2", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -46,4 +48,4 @@ rule minimap2_index:
         threads=config.get("minimap2", {}).get("threads", config["default_resources"]["threads"]),
         time=config.get("minimap2", {}).get("time", config["default_resources"]["time"]),
     shell:
-        "samtools index {input.bam}"
+        "samtools index {input.bam} &> log"
