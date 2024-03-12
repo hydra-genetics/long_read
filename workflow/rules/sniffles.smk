@@ -36,4 +36,4 @@ rule sniffles:
         "{params.non_germline} "
         "{params.extra} "
         "--vcf {output.vcf} "
-        "--snf {output.vcf} &> {log} "
+        "--snf {output.snf} &> {log} "
