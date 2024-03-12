@@ -37,7 +37,7 @@ rule minimap2_index:
     input:
         bam="long_read/minimap2/{sample}_{type}.bam",
     output:
-        bai="long_read/minimap2/{sample}_{type}.bai",
+        bai="long_read/minimap2/{sample}_{type}.bam.bai",
     log:
         "long_read/minimap2/{sample}_{type}.bamindex.log",
     threads: config.get("minimap2", {}).get("threads", config["default_resources"]["threads"])
