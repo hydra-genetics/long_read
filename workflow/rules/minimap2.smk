@@ -11,6 +11,7 @@ rule minimap2:
         index=config.get("minimap2", {}).get("index", ""),
     output:
         bam="long_read/minimap2/{sample}_{type}.bam",
+        bai="long_read/minimap2/{sample}_{type}.bai",
     params:
         extra=config.get("minimap2", {}).get("extra", ""),
         sorting=config.get("minimap2", {}).get("sorting", ""),
@@ -32,3 +33,5 @@ rule minimap2:
         "{rule}: run minimap2 on {input}"
     wrapper:
         "v3.3.5/bio/minimap2/aligner"
+    shell:
+        "samtools index {output.bam}"
