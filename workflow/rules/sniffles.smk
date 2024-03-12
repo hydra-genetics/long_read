@@ -35,4 +35,4 @@ rule sniffles:
         "-t {threads} "
         "{params.extra} "
         "--vcf {output.vcf} "
-        "--snf {output.snf}  &> log "
+        "--snf {output.snf}  &> {log} "
