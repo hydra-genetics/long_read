@@ -30,7 +30,7 @@ rule sniffles:
     message:
         "{rule}: Calls SVs on {input.bam} with sniffles"
     shell:
-        "echo sniffles -i {input.bam} "
+        "sniffles -i {input.bam} "
         "--reference {input.fasta} "
         "-t {threads} "
         "{params.extra} "
