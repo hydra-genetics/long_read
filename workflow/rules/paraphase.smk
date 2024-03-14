@@ -23,7 +23,7 @@ rule paraphase:
     log:
         "long_read/paraphase/{sample}_{type}_{flowcell}_{barcode}.paraphrase.log",
     benchmark:
-        repeat("long_read/paraphase/{sample}_{type}.out.benchmark.tsv", config.get("paraphase", {}).get("benchmark_repeats", 1))
+        repeat("long_read/paraphase/{sample}_{type}_{flowcell}_{barcode}.out.benchmark.tsv", config.get("paraphase", {}).get("benchmark_repeats", 1))
     threads: config.get("paraphase", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("paraphase", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
