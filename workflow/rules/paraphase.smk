@@ -15,13 +15,13 @@ rule paraphase:
         fasta=config.get("paraphase", {}).get("fasta", ""),
         vcf_header=config.get("paraphase", {}).get("vcf_header", ""),
     output:
-        merged_vcf = "long_read/paraphase/{sample}_{type}_paraphase.vcf.gz",
+        merged_vcf = "long_read/paraphrase/{sample}_{type}_{flowcell}_{barcode}.paraphrase.vcf.gz",
     params:
         genome=config.get("paraphase", {}).get("genome", ""),
         extra=config.get("paraphase", {}).get("extra", ""),
         outfolder=directory("long_read/paraphase/"),
     log:
-        "long_read/paraphase/{sample}-{type}.vcf.log",
+        "long_read/paraphase/{sample}_{type}_{flowcell}_{barcode}.paraphrase.log",
     benchmark:
         repeat("long_read/paraphase/{sample}_{type}.out.benchmark.tsv", config.get("paraphase", {}).get("benchmark_repeats", 1))
     threads: config.get("paraphase", {}).get("threads", config["default_resources"]["threads"])
