@@ -15,7 +15,7 @@ rule paraphase:
         fasta=config.get("paraphase", {}).get("fasta", ""),
         vcf_header=config.get("paraphase", {}).get("vcf_header", ""),
     output:
-        merged_vcf = "long_read/paraphrase/{sample}_{type}_{flowcell}_{barcode}.paraphrase.vcf.gz",
+        merged_vcf = "long_read/paraphase/{sample}_{type}_{flowcell}_{barcode}.paraphrase.vcf.gz",
     params:
         genome=config.get("paraphase", {}).get("genome", ""),
         extra=config.get("paraphase", {}).get("extra", ""),
