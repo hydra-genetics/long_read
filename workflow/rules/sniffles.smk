@@ -10,14 +10,14 @@ rule sniffles:
         bai="long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam.bai",
         fasta=config.get("reference", {}).get("fasta", ""),
     output:
-        vcf="long_read/sniffles/{sample}_{type}.vcf.gz",
-        snf="long_read/sniffles/{sample}_{type}.snf",
+        vcf="long_read/sniffles/{sample}_{type}_{flowcell}_{barcode}.vcf.gz",
+        snf="long_read/sniffles/{sample}_{type}_{flowcell}_{barcode}.snf",
     params:
         extra=config.get("sniffles", {}).get("extra", ""),
     log:
-        "long_read/sniffles/{sample}_{type}.vcf.log",
+        "long_read/sniffles/{sample}_{type}_{flowcell}_{barcode}.vcf.log",
     benchmark:
-        repeat("long_read/sniffles/{sample}_{type}.vcf.benchmark.tsv", config.get("sniffles", {}).get("benchmark_repeats", 1))
+        repeat("long_read/sniffles/{sample}_{type}_{flowcell}_{barcode}.vcf.benchmark.tsv", config.get("sniffles", {}).get("benchmark_repeats", 1))
     threads: config.get("sniffles", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("sniffles", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
