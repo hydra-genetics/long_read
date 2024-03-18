@@ -6,7 +6,7 @@ __license__ = "GPL-3"
 
 rule pbsv_discover:
     input:
-        bam="long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.bam",
+        bam="long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam",
     output:
         svsig="long_read/pbsv_discover/{sample}_{type}_{flowcell}_{barcode}.svsig.gz",
     params:
