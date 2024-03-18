@@ -16,9 +16,9 @@ rule minimap2:
         sorting=config.get("minimap2", {}).get("sorting", ""),
         sorting_extra=config.get("minimap2", {}).get("sorting_extra", ""),
     log:
-        "long_read/minimap2/{sample}_{type}.bam.log",
+        "long_read/minimap2/{sample}_{type}_{flowcell}_{barcode}.bam.log",
     benchmark:
-        repeat("long_read/minimap2/{sample}_{type}.bam.benchmark.tsv", config.get("minimap2", {}).get("benchmark_repeats", 1))
+        repeat("long_read/minimap2/{sample}_{type}_{flowcell}_{barcode}.bam.benchmark.tsv", config.get("minimap2", {}).get("benchmark_repeats", 1))
     threads: config.get("minimap2", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("minimap2", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -35,11 +35,11 @@ rule minimap2:
 
 rule minimap2_index:
     input:
-        bam="long_read/minimap2/{sample}_{type}.mm2.bam",
+        bam="long_read/minimap2/{sample}_{type}_{flowcell}_{barcode}.mm2.bam",
     output:
-        bai="long_read/minimap2/{sample}_{type}.mm2.bam.bai",
+        bai="long_read/minimap2/{sample}_{type}_{flowcell}_{barcode}.mm2.bam.bai",
     log:
-        "long_read/minimap2/{sample}_{type}.bamindex.log",
+        "long_read/minimap2/{sample}_{type}_{flowcell}_{barcode}.bamindex.log",
     threads: config.get("minimap2", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("minimap2", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
