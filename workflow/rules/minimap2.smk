@@ -10,7 +10,7 @@ rule minimap2:
         target=config.get("reference", {}).get("fasta", ""),
         index=config.get("minimap2", {}).get("index", ""),
     output:
-        bam="long_read/minimap2/{sample}_{type}.bam",
+        bam="long_read/minimap2/{sample}_{type}.mm2.bam",
     params:
         extra=config.get("minimap2", {}).get("extra", ""),
         sorting=config.get("minimap2", {}).get("sorting", ""),
@@ -35,9 +35,9 @@ rule minimap2:
 
 rule minimap2_index:
     input:
-        bam="long_read/minimap2/{sample}_{type}.bam",
+        bam="long_read/minimap2/{sample}_{type}.mm2.bam",
     output:
-        bai="long_read/minimap2/{sample}_{type}.bam.bai",
+        bai="long_read/minimap2/{sample}_{type}.mm2.bam.bai",
     log:
         "long_read/minimap2/{sample}_{type}.bamindex.log",
     threads: config.get("minimap2", {}).get("threads", config["default_resources"]["threads"])
