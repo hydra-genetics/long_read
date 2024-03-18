@@ -11,7 +11,7 @@ GENE = ["smn1","CR1","AMY1A","CTAG1A","BOLA2"]
 
 rule paraphase:
     input:
-        bam="long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.sort.bam",
+        bam="long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam",
         fasta=config.get("paraphase", {}).get("fasta", ""),
         vcf_header=config.get("paraphase", {}).get("vcf_header", ""),
     output:
