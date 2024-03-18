@@ -6,8 +6,8 @@ __license__ = "GPL-3"
 
 rule sniffles:
     input:
-        bam="long_read/minimap2/{sample}_{type}.bam",
-        bai="long_read/minimap2/{sample}_{type}.bam.bai",
+        bam="long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam",
+        bai="long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam.bai",
         fasta=config.get("reference", {}).get("fasta", ""),
     output:
         vcf="long_read/sniffles/{sample}_{type}.vcf.gz",
