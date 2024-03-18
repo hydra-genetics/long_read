@@ -10,7 +10,7 @@ rule minimap2:
         target=config.get("reference", {}).get("fasta", ""),
         index=config.get("minimap2", {}).get("index", ""),
     output:
-        bam="long_read/minimap2/{sample}_{type}.mm2.bam",
+        bam="long_read/minimap2/{sample}_{type}_{flowcell}_{barcode}.mm2.bam",
     params:
         extra=config.get("minimap2", {}).get("extra", ""),
         sorting=config.get("minimap2", {}).get("sorting", ""),
