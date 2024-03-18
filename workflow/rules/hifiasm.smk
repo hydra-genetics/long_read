@@ -7,13 +7,12 @@ __license__ = "GPL-3"
 rule hifiasm:
     input:
         fasta=[
-            "reads/HiFi_dataset_01.fasta.gz",
-            "reads/HiFi_dataset_02.fasta.gz",
+            "long_read/hifiasm/{sample}_{type}_{flowcell}_{barcode}.s2fq.fasta",
         ],
     # optional
     output:
         multiext(
-            "hifiasm/{sample}.",
+            "long_read/hifiasm/{sample}_{type}_{flowcell}_{barcode}.",
             "a_ctg.gfa",
             "a_ctg.lowQ.bed",
             "a_ctg.noseq.gfa",
@@ -28,7 +27,7 @@ rule hifiasm:
             "r_utg.noseq.gfa",
         ),
     log:
-        "logs/hifiasm/{sample}.log",
+        "long_read/hifiasm/{sample}_{type}_{flowcell}_{barcode}.log",
     params:
         extra="--primary -f 37 -l 1 -s 0.75 -O 1",
     threads: 2
