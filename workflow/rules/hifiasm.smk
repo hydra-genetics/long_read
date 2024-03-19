@@ -19,6 +19,7 @@ rule hifiasm:
         partition=config.get("hifiasm", {}).get("partition", config["default_resources"]["partition"]),
         time=config.get("hifiasm", {}).get("time", config["default_resources"]["time"]),
         mem_per_cpu=config.get("hifiasm", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]), 
+        threads=config.get("hifiasm", {}).get("threads", config["default_resources"]["threads"]),
     wrapper:
         "v3.3.6/bio/hifiasm"
 
