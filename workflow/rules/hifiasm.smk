@@ -14,9 +14,11 @@ rule hifiasm:
         "long_read/hifiasm/{sample}_{type}_{flowcell}_{barcode}.log",
     params:
         extra="--primary -f 37 -l 1 -s 0.75 -O 1",
-    threads: 2
+    threads: config.get("hifiasm", {}).get("threads", config["default_resources"]["threads"]),
     resources:
-        mem_mb=1024,
+        partition=config.get("hifiasm", {}).get("partition", config["default_resources"]["partition"]),
+        time=config.get("hifiasm", {}).get("time", config["default_resources"]["time"]),
+        mem_per_cpu=config.get("hifiasm", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]), 
     wrapper:
         "v3.3.6/bio/hifiasm"
 
