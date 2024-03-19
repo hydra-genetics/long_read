@@ -16,13 +16,11 @@ rule whatshap_phase:
     shell:
         """
         (whatshap phase {params.extra} \
-            --chromosome {wildcards.chromosome} \
             --output {output} \
             --reference {input.reference} \
             {input.vcf} \
             {input.phaseinput}) > {log} 2>&1
         """
-
 
 # whatshap phase -o phased.vcf --reference=reference.fasta input.vcf input.bam
 
