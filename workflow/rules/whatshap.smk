@@ -4,7 +4,7 @@ rule whatshap_phase:
     input:
         reference = config['ref']['fasta'],
         vcf = "parabricks/pbrun_deepvariant/{sample}_{type}_{flowcell}_{barcode}.deepvariant.g.vcf.gz",
-        tbi = parabricks/pbrun_deepvariant/{sample}_{type}_{flowcell}_{barcode}.deepvariant.g.vcf.gz.tbi",
+        tbi = "parabricks/pbrun_deepvariant/{sample}_{type}_{flowcell}_{barcode}.deepvariant.g.vcf.gz.tbi",
         phaseinput = "long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam",
         phaseinputindex = "long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam.bai"
     output: "long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.deepvariant.phased.vcf.gz")
