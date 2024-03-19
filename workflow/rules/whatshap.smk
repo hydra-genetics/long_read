@@ -11,7 +11,6 @@ rule whatshap_phase:
     log: "long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.deepvariant.phased.log",
     benchmark: "long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.deepvariant.phased.tsv",
     params: 
-        chromosome = lambda wildcards: wildcards.chromosome, 
         extra = "--indels",
     shell:
         """
