@@ -13,7 +13,7 @@ include: "rules/paraphase.smk"
 include: "rules/pbmm2.smk"
 include: "rules/pbsv.smk"
 include: "rules/sniffles.smk"
-include: "rules/trgt.smk"
+#include: "rules/trgt.smk"
 include: "rules/whatshap.smk"
 
 
