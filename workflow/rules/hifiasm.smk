@@ -6,9 +6,7 @@ __license__ = "GPL-3"
 
 rule hifiasm:
     input:
-        fasta=[
             "long_read/hifiasm/{sample}_{type}_{flowcell}_{barcode}.s2fq.fasta",
-        ],
     # optional
     output:
         "long_read/hifiasm/{sample}_{type}_{flowcell}_{barcode}.a_ctg.gfa",
