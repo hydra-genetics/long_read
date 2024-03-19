@@ -10,8 +10,8 @@ rule whatshap_phase:
     output: "long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.deepvariant.phased.vcf.gz"),
     log: "long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.deepvariant.phased.log",
     benchmark: "long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.deepvariant.phased.tsv",
-    params: 
-        extra="--indels",
+    params:
+        extra=config.get("whatshap_phase", {}).get("extra", ""),
     shell:
         """
         (whatshap phase {params.extra} \
@@ -35,7 +35,7 @@ rule whatshap_haplotag:
     output:
         "alignment.phased.bam"
     params:
-        extra="" # optionally use --ignore-linked-read, --tag-supplementary, etc.
+        extra=config.get("whatshap_phase", {}).get("extra", ""), # optionally use --ignore-linked-read, --tag-supplementary, etc.
     log:
         "logs/haplotag.10X.phased.log"
     threads: 4
