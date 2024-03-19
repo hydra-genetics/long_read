@@ -6,11 +6,16 @@ __license__ = "GPL-3"
 
 include: "rules/common.smk"
 include: "rules/guppy.smk"
-include: "rules/pbmm2.smk"
+include: "rules/hifiasm.smk"
+include: "rules/make_fastq.smk"
 include: "rules/minimap2.smk"
+include: "rules/paraphase.smk"
+include: "rules/pbmm2.smk"
 include: "rules/pbsv.smk"
 include: "rules/sniffles.smk"
-include: "rules/paraphase.smk"
+include: "rules/trgt.smk"
+include: "rules/whatshap.smk"
+
 
 
 report: "report/workflow.rst"
