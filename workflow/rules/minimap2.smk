@@ -7,18 +7,18 @@ __license__ = "GPL-3"
 rule minimap2:
     input:
         query=lambda wildcards: get_minimap2_query(wildcards),
-        target=config.get("reference", []).get("fasta", ""),
+        target=config.get("reference", {}).get("fasta", ""),
         index=config.get("minimap2", {}).get("index", ""),
     output:
-        bam="long_read/minimap2/{sample}_{type}.bam",
+        bam="long_read/minimap2/{sample}_{type}_{flowcell}_{barcode}.mm2.bam",
     params:
         extra=config.get("minimap2", {}).get("extra", ""),
         sorting=config.get("minimap2", {}).get("sorting", ""),
         sorting_extra=config.get("minimap2", {}).get("sorting_extra", ""),
     log:
-        "long_read/minimap2/{sample}_{type}.bam.log",
+        "long_read/minimap2/{sample}_{type}_{flowcell}_{barcode}.bam.log",
     benchmark:
-        repeat("long_read/minimap2/{sample}_{type}.bam.benchmark.tsv", config.get("minimap2", {}).get("benchmark_repeats", 1))
+        repeat("long_read/minimap2/{sample}_{type}_{flowcell}_{barcode}.bam.benchmark.tsv", config.get("minimap2", {}).get("benchmark_repeats", 1))
     threads: config.get("minimap2", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("minimap2", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -31,4 +31,21 @@ rule minimap2:
     message:
         "{rule}: run minimap2 on {input}"
     wrapper:
-        "v1.28.0/bio/minimap2/aligner"
+        "v3.3.5/bio/minimap2/aligner"
+
+rule minimap2_index:
+    input:
+        bam="long_read/minimap2/{sample}_{type}_{flowcell}_{barcode}.mm2.bam",
+    output:
+        bai="long_read/minimap2/{sample}_{type}_{flowcell}_{barcode}.mm2.bam.bai",
+    log:
+        "long_read/minimap2/{sample}_{type}_{flowcell}_{barcode}.bamindex.log",
+    threads: config.get("minimap2", {}).get("threads", config["default_resources"]["threads"])
+    resources:
+        mem_mb=config.get("minimap2", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
+        mem_per_cpu=config.get("minimap2", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
+        partition=config.get("minimap2", {}).get("partition", config["default_resources"]["partition"]),
+        threads=config.get("minimap2", {}).get("threads", config["default_resources"]["threads"]),
+        time=config.get("minimap2", {}).get("time", config["default_resources"]["time"]),
+    shell:
+        "samtools index {input.bam} &> log"

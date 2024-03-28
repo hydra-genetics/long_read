@@ -6,16 +6,16 @@ __license__ = "GPL-3"
 
 rule pbsv_discover:
     input:
-        bam="long_read/samtools_merged_bam/{sample}_{type}.bam",
+        bam="long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam",
     output:
-        svsig="long_read/pbsv_discover/{sample}_{type}.svsig.gz",
+        svsig="long_read/pbsv_discover/{sample}_{type}_{flowcell}_{barcode}.svsig.gz",
     params:
         extra=config.get("pbsv_discover", {}).get("extra", ""),
     log:
-        "long_read/pbsv_discover/{sample}_{type}.svsig.gz.log",
+        "long_read/pbsv_discover/{sample}_{type}_{flowcell}_{barcode}.svsig.gz.log",
     benchmark:
         repeat(
-            "long_read/pbsv_discover/{sample}_{type}.svsig.gz.benchmark.tsv",
+            "long_read/pbsv_discover/{sample}_{type}_{flowcell}_{barcode}.svsig.gz.benchmark.tsv",
             config.get("pbsv_discover", {}).get("benchmark_repeats", 1),
         )
     threads: config.get("pbsv_discover", {}).get("threads", config["default_resources"]["threads"])
@@ -39,19 +39,19 @@ rule pbsv_discover:
 
 rule pbsv_call:
     input:
-        svsig="long_read/pbsv_discover/{sample}_{type}.svsig.gz",
-        tabix="long_read/pbsv_discover/{sample}_{type}.svsig.gz.tbi",
+        svsig="long_read/pbsv_discover/{sample}_{type}_{flowcell}_{barcode}.svsig.gz",
+        tabix="long_read/pbsv_discover/{sample}_{type}_{flowcell}_{barcode}.svsig.gz.tbi",
         ref=config.get("reference", {}).get("fasta", ""),
     output:
-        vcf="long_read/pbsv_call/{sample}_{type}.vcf",
+        vcf="long_read/pbsv_call/{sample}_{type}_{flowcell}_{barcode}.vcf",
     params:
         ccs=config.get("pbsv_call", {}).get("ccs", ""),
         extra=config.get("pbsv_call", {}).get("extra", ""),
     log:
-        "long_read/pbsv_call/{sample}_{type}.vcf.log",
+        "long_read/pbsv_call/{sample}_{type}_{flowcell}_{barcode}.vcf.log",
     benchmark:
         repeat(
-            "long_read/pbsv_call/{sample}_{type}.vcf.benchmark.tsv",
+            "long_read/pbsv_call/{sample}_{type}_{flowcell}_{barcode}.vcf.benchmark.tsv",
             config.get("pbsv_call", {}).get("benchmark_repeats", 1),
         )
     threads: config.get("pbsv_call", {}).get("threads", config["default_resources"]["threads"])

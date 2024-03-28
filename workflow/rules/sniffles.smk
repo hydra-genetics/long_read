@@ -6,17 +6,18 @@ __license__ = "GPL-3"
 
 rule sniffles:
     input:
-        bam="long_read/minimap2/{sample}_{type}.bam",
+        bam="long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam",
+        bai="long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam.bai",
         fasta=config.get("reference", {}).get("fasta", ""),
     output:
-        vcf="long_read/sniffles/{sample}_{type}.vcf",
+        vcf="long_read/sniffles/{sample}_{type}_{flowcell}_{barcode}.vcf.gz",
+        snf="long_read/sniffles/{sample}_{type}_{flowcell}_{barcode}.snf",
     params:
         extra=config.get("sniffles", {}).get("extra", ""),
-        non_germline=config.get("sniffles", {}).get("non_germline", ""),
     log:
-        "long_read/sniffles/{sample}_{type}.vcf.log",
+        "long_read/sniffles/{sample}_{type}_{flowcell}_{barcode}.vcf.log",
     benchmark:
-        repeat("long_read/sniffles/{sample}_{type}.vcf.benchmark.tsv", config.get("sniffles", {}).get("benchmark_repeats", 1))
+        repeat("long_read/sniffles/{sample}_{type}_{flowcell}_{barcode}.vcf.benchmark.tsv", config.get("sniffles", {}).get("benchmark_repeats", 1))
     threads: config.get("sniffles", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("sniffles", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -28,10 +29,10 @@ rule sniffles:
         config.get("sniffles", {}).get("container", config["default_container"])
     message:
         "{rule}: Calls SVs on {input.bam} with sniffles"
-    script:
+    shell:
         "sniffles -i {input.bam} "
         "--reference {input.fasta} "
         "-t {threads} "
-        "{params.non_germline} "
         "{params.extra} "
-        "-v {output.vcf} &> {log} "
+        "--vcf {output.vcf} "
+        "--snf {output.snf}  &> {log} "

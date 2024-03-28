@@ -4,7 +4,7 @@ samples: "config/samples.tsv"
 units: "config/units.tsv"
 
  default_container: "docker://hydragenetics/common:0.3.0"
-
+  
  pbmm2_align:
   index: reference/homo_sapiens.mmi
   preset: "HIFI"
@@ -12,17 +12,17 @@ units: "config/units.tsv"
 reference:
   fasta: "data/reference.fasta"
 
-basecaller: "gpu" #gpu or cpu
+basecaller: "cpu" #gpu or cpu
 
 guppy_basecaller_cpu:
   container: docker://genomicpariscentre/guppy:6.5.7
-  configuration_file: "config.cfg"
+  configuration_file: "guppy.config.cfg"
   num_callers: 1
   threads_per_caller: 1
 
 guppy_basecaller_gpu:
   container: docker://genomicpariscentre/guppy-gpu:6.5.7
-  configuration_file: "config.cfg"
+  configuration_file: "guppy.config.cfg"
   chunks: 20
 
 pbsv_discover:

@@ -3,21 +3,19 @@ __copyright__ = "Copyright 2023, Nina Hollfelder"
 __email__ = "nina_hollfelder@scilifelab.uu.se"
 __license__ = "GPL-3"
 
-
 basecaller = config.get("basecaller", None)
 
 if basecaller is None:
     sys.exit("basecaller missing from config, valid options: gpu or cpu")
 
 elif basecaller == "gpu":
-
     rule guppy_basecaller_gpu:
         input:
             fast5dir="long_read/fast5",
             configfile=config["guppy_basecaller_gpu"]["configuration_file"],
         output:
-            seqsum="long_read/guppy/sequencing_summary.txt"
-            fastq=
+            seqsum="long_read/guppy/sequencing_summary.txt",
+            fastq="long_read/guppy/guppy_basecaller.gpu.fastq",
         params:
             extra=config.get("guppy_basecaller_gpu", {}).get("extra", ""),
             gpu="cuda:0",
@@ -26,7 +24,10 @@ elif basecaller == "gpu":
         log:
             "long_read/guppy/guppy_basecaller_gpu.log",
         benchmark:
-            repeat("long_read/guppy/guppy_basecaller_gpu.benchmark.tsv", config.get("guppy_basecaller_gpu", {}).get("benchmark_repeats", 1))
+            repeat(
+                "long_read/guppy/guppy_basecaller_gpu.benchmark.tsv",
+                config.get("guppy_basecaller_gpu", {}).get("benchmark_repeats", 1),
+            )
         threads: config.get("guppy_basecaller_gpu", {}).get("threads", config["default_resources"]["threads"])
         resources:
             mem_mb=config.get("guppy_basecaller_gpu", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -47,14 +48,13 @@ elif basecaller == "gpu":
             " {params.extra} &> {log} "
 
 elif basecaller == "cpu":
-
     rule guppy_basecaller_cpu:
         input:
             fast5dir="long_read/fast5",
             configfile=config["guppy_basecaller_cpu"]["configuration_file"],
         output:
             seqsum="long_read/guppy/sequencing_summary.txt",
-            fastq= #
+            fastq="long_read/guppy/guppy_basecaller_cpu.fastq",
         params:
             extra=config.get("guppy_basecaller_cpu", {}).get("extra", ""),
             num_caller=config.get("guppy_basecaller_cpu", {}).get("num_callers", "1"),
@@ -62,7 +62,10 @@ elif basecaller == "cpu":
         log:
             "long_read/guppy/guppy_basecaller_cpu.log",
         benchmark:
-            repeat("long_read/guppy/guppy_basecaller_cpu.benchmark.tsv", config.get("guppy_basecaller_cpu", {}).get("benchmark_repeats", 1))
+            repeat(
+                "long_read/guppy/guppy_basecaller_cpu.benchmark.tsv",
+                config.get("guppy_basecaller_cpu", {}).get("benchmark_repeats", 1),
+            )
         threads: config.get("guppy_basecaller_cpu", {}).get("threads", config["default_resources"]["threads"])
         resources:
             mem_mb=config.get("guppy_basecaller_cpu", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
