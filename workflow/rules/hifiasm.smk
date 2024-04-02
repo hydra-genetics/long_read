@@ -6,13 +6,13 @@ __license__ = "GPL-3"
 
 rule hifiasm:
     input:
-            "long_read/hifiasm/{sample}_{type}_{flowcell}_{barcode}.s2fq.fasta",
+        "long_read/hifiasm/{sample}_{type}_{flowcell}_{barcode}.s2fq.fasta",
     # optional
     output:
         "long_read/hifiasm/{sample}_{type}_{flowcell}_{barcode}.a_ctg.gfa",
     log:
         "long_read/hifiasm/{sample}_{type}_{flowcell}_{barcode}.log",
-  container:
+    container:
         config.get("hifiasm", {}).get("container", config["default_container"]),
     params:
         extra="--primary -f 37 -l 1 -s 0.75 -O 1",
