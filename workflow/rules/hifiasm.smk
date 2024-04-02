@@ -23,6 +23,7 @@ rule hifiasm:
         mem_per_cpu=config.get("hifiasm", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]), 
         threads=config.get("hifiasm", {}).get("threads", config["default_resources"]["threads"]),
     wrapper:
-        "v3.3.6/bio/hifiasm"
+        "file:///beegfs-storage/projects/wp3/nobackup/Workspace/magz_testing/snakemake-wrappers/bio/hifiasm"
+        # "v3.3.6/bio/hifiasm"
 
 # Dervied from https://snakemake-wrappers.readthedocs.io/en/stable/wrappers/hifiasm.html
