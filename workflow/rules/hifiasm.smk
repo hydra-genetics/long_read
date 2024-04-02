@@ -12,6 +12,8 @@ rule hifiasm:
         "long_read/hifiasm/{sample}_{type}_{flowcell}_{barcode}.a_ctg.gfa",
     log:
         "long_read/hifiasm/{sample}_{type}_{flowcell}_{barcode}.log",
+  container:
+        config.get("hifiasm", {}).get("container", config["default_container"]),
     params:
         extra="--primary -f 37 -l 1 -s 0.75 -O 1",
     threads: config.get("hifiasm", {}).get("threads", config["default_resources"]["threads"]),
