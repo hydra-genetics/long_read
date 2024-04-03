@@ -9,7 +9,7 @@ rule hifiasm:
         fasta=["long_read/hifiasm/{sample}_{type}_{flowcell}_{barcode}.s2fq.fasta",],
     # optional
     output:
-        "long_read/hifiasm/{sample}_{type}_{flowcell}_{barcode}.hifiasm.a_ctg.gfa",
+        "long_read/hifiasm/{sample}_{type}_{flowcell}_{barcode}.a_ctg.gfa",
     log:
         "long_read/hifiasm/{sample}_{type}_{flowcell}_{barcode}.log",
     container:
