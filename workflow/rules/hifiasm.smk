@@ -9,7 +9,22 @@ rule hifiasm:
         fasta=["long_read/hifiasm/{sample}_{type}_{flowcell}_{barcode}.s2fq.fasta"],
     # optional
     output:
-        "long_read/hifiasm/{sample}_{type}_{flowcell}_{barcode}.a_ctg.gfa",
+        #"long_read/hifiasm/{sample}_{type}_{flowcell}_{barcode}.a_ctg.gfa",
+        multiext(
+            "long_read/hifiasm/{sample}_{type}_{flowcell}_{barcode}.",
+            "a_ctg.gfa",
+            "a_ctg.lowQ.bed",
+            "a_ctg.noseq.gfa",
+            "p_ctg.gfa",
+            "p_ctg.lowQ.bed",
+            "p_ctg.noseq.gfa",
+            "p_utg.gfa",
+            "p_utg.lowQ.bed",
+            "p_utg.noseq.gfa",
+            "r_utg.gfa",
+            "r_utg.lowQ.bed",
+            "r_utg.noseq.gfa",
+        ),
     log:
         "long_read/hifiasm/{sample}_{type}_{flowcell}_{barcode}.log",
     container:
