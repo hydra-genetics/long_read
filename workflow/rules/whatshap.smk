@@ -7,9 +7,9 @@ rule whatshap_phase:
         tbi="parabricks/pbrun_deepvariant/{sample}_{type}_{flowcell}_{barcode}.deepvariant.g.vcf.gz.tbi",
         phaseinput="long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam",
         phaseinputindex="long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam.bai",
-    output: "long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.deepvariant.phased.vcf.gz",
-    log: "long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.deepvariant.phased.log",
-    benchmark: "long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.deepvariant.phased.tsv",
+    output: "long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap.phased.vcf.gz",
+    log: "long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap.phased.log",
+    benchmark: "long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap.phased.tsv",
     params:
         extra=config.get("whatshap_phase", {}).get("extra", ""),
     shell:
