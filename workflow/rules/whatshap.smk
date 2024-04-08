@@ -27,26 +27,28 @@ rule whatshap_phase:
             --output {output} \
             --reference {input.reference} \
             {input.vcf} \
-            {input.phaseinput}) > {log} 2>&1
+            {input.phaseinput}) > {log} 2>&1 && \
+        tabix -p vcf {output} >> {log} 2>&1
         """
 
 # whatshap phase -o phased.vcf --reference=reference.fasta input.vcf input.bam
 
 
+
 rule whatshap_haplotag:
     input:
-        "phased.vcf.gz.tbi",
-        "alignment.bam.bai",
-        "reference.fasta.fai",
-        vcf="phased.vcf.gz",
-        aln="alignment.bam",
-        ref="reference.fasta"
+        "long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap.phased.vcf.gz.tbi",
+        "long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam.bai",
+        config['reference']['fai'],
+        vcf="long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap.phased.vcf.gz",
+        aln="long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam",
+        ref=config['reference']['fasta'],
     output:
-        "alignment.phased.bam"
+        "long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap_haplotagged.bam"
     params:
         extra=config.get("whatshap_phase", {}).get("extra", ""), # optionally use --ignore-linked-read, --tag-supplementary, etc.
     log:
-        "logs/haplotag.10X.phased.log"
+        "long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap_haplotagged.log"
     threads: config.get("whatshap_haplotag", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("whatshap_haplotag", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -55,7 +57,7 @@ rule whatshap_haplotag:
         threads=config.get("whatshap_haplotag", {}).get("threads", config["default_resources"]["threads"]),
         time=config.get("whatshap_haplotag", {}).get("time", config["default_resources"]["time"]),
     container:
-        config.get("whatshap_haplotag", {}).get("container", config["default_container"])
+        config.get("whatshap_phase", {}).get("container", config["default_container"])
     wrapper:
         "v3.5.2/bio/whatshap/haplotag"
 
