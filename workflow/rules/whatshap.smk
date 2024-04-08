@@ -46,7 +46,7 @@ rule whatshap_haplotag:
     output:
         "long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap_haplotagged.bam"
     params:
-        extra=config.get("whatshap_phase", {}).get("extra", ""), # optionally use --ignore-linked-read, --tag-supplementary, etc.
+        extra=config.get("whatshap_haplotag", {}).get("extra", ""), # optionally use --ignore-linked-read, --tag-supplementary, etc.
     log:
         "long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap_haplotagged.log"
     threads: config.get("whatshap_haplotag", {}).get("threads", config["default_resources"]["threads"])
