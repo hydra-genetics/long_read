@@ -12,7 +12,7 @@ rule trgt_genotype:
         reference=config['reference']['fasta'],
         bam = f"long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam",
         bai = f"long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam.bai",
-        bed = config['ref']['trgt_bed'],
+        bed = config['reference']['trgt_bed'],
     output:
         vcf = f"samples/{sample}/trgt/{sample}.{ref}.trgt.vcf.gz",
         bam = f"samples/{sample}/trgt/{sample}.{ref}.trgt.spanning.bam",
@@ -37,7 +37,7 @@ rule trgt_coverage_dropouts:
     input:
         bam = f"long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap_haplotagged.bam",
         bai = f"long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap_haplotagged.bam.bai",
-        bed = config['ref']['trgt_bed']
+        bed = config['reference']['trgt_bed']
     output: f"long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.trgt.dropouts.txt"
     log: f"long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.dropouts.log"
     benchmark: f"long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.dropouts.tsv"
