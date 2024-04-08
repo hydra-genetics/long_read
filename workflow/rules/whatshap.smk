@@ -7,7 +7,9 @@ rule whatshap_phase:
         tbi="parabricks/pbrun_deepvariant/{sample}_{type}_{flowcell}_{barcode}.deepvariant.g.vcf.idx",
         phaseinput="long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam",
         phaseinputindex="long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam.bai",
-    output: "long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap.phased.vcf.gz",
+    output: 
+        out="long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap.phased.vcf.gz",
+        outindex="long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap.phased.vcf.gz",
     log: "long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap.phased.log",
     benchmark: "long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap.phased.tsv",
     params:
@@ -24,11 +26,11 @@ rule whatshap_phase:
     shell:
         """
         (whatshap phase {params.extra} \
-            --output {output} \
+            --output {output.out} \
             --reference {input.reference} \
             {input.vcf} \
             {input.phaseinput}) > {log} 2>&1 && \
-        tabix -p vcf {output} >> {log} 2>&1
+        tabix -p vcf {output.out} >> {log} 2>&1
         """
 
 
