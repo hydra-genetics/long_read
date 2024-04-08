@@ -9,7 +9,7 @@ ruleorder: trgt_genotype > bgzip_vcf
 
 rule trgt_genotype:
     input:
-        reference = config['ref']['fasta'],
+        reference=config['reference']['fasta'],
         bam = f"long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam",
         bai = f"long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam.bai",
         bed = config['ref']['trgt_bed'],
