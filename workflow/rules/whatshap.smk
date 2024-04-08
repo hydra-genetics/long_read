@@ -12,6 +12,15 @@ rule whatshap_phase:
     benchmark: "long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap.phased.tsv",
     params:
         extra=config.get("whatshap_phase", {}).get("extra", ""),
+    threads: config.get("whatshap_phase", {}).get("threads", config["default_resources"]["threads"])
+    resources:
+        mem_mb=config.get("whatshap_phase", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
+        mem_per_cpu=config.get("whatshap_phase", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
+        partition=config.get("whatshap_phase", {}).get("partition", config["default_resources"]["partition"]),
+        threads=config.get("whatshap_phase", {}).get("threads", config["default_resources"]["threads"]),
+        time=config.get("whatshap_phase", {}).get("time", config["default_resources"]["time"]),
+    container:
+        config.get("whatshap_phase", {}).get("container", config["default_container"])
     shell:
         """
         (whatshap phase {params.extra} \
@@ -38,7 +47,15 @@ rule whatshap_haplotag:
         extra=config.get("whatshap_phase", {}).get("extra", ""), # optionally use --ignore-linked-read, --tag-supplementary, etc.
     log:
         "logs/haplotag.10X.phased.log"
-    threads: 4
+    threads: config.get("whatshap_haplotag", {}).get("threads", config["default_resources"]["threads"])
+    resources:
+        mem_mb=config.get("whatshap_haplotag", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
+        mem_per_cpu=config.get("whatshap_haplotag", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
+        partition=config.get("whatshap_haplotag", {}).get("partition", config["default_resources"]["partition"]),
+        threads=config.get("whatshap_haplotag", {}).get("threads", config["default_resources"]["threads"]),
+        time=config.get("whatshap_haplotag", {}).get("time", config["default_resources"]["time"]),
+    container:
+        config.get("whatshap_haplotag", {}).get("container", config["default_container"])
     wrapper:
         "v3.5.2/bio/whatshap/haplotag"
 
