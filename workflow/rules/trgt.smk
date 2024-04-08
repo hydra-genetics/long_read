@@ -14,13 +14,13 @@ rule trgt_genotype:
         bai = f"long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam.bai",
         bed = config['reference']['trgt_bed'],
     output:
-        vcf = f"long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.trgt.vcf.gz",
-        bam = f"long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.trgt.spanning.bam",
-    log: f"long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.genotype.log"
-    benchmark: f"long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.genotype.tsv"
+        vcf = "long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.trgt.vcf.gz",
+        bam = "long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.trgt.spanning.bam",
+    log: "long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.genotype.log",
+    benchmark: "long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.genotype.tsv",
     conda: "envs/trgt.yaml"
     params:
-        prefix = f"long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.trgt"
+        prefix = "long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.trgt",
     threads: 32
     message: "Executing {rule}: Genotyping tandem repeat regions from {input.bed} in {input.bam}."
     shell:
