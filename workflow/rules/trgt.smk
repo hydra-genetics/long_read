@@ -10,8 +10,8 @@ ruleorder: trgt_genotype > bgzip_vcf
 rule trgt_genotype:
     input:
         reference = config['ref']['fasta'],
-        bam = f"samples/{sample}/whatshap/{sample}.{ref}.deepvariant.haplotagged.bam",
-        bai = f"samples/{sample}/whatshap/{sample}.{ref}.deepvariant.haplotagged.bam.bai",
+        bam = f"long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam",
+        bai = f"long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam.bai",
         bed = config['ref']['trgt_bed'],
     output:
         vcf = f"samples/{sample}/trgt/{sample}.{ref}.trgt.vcf.gz",
@@ -35,12 +35,12 @@ rule trgt_genotype:
 
 rule trgt_coverage_dropouts:
     input:
-        bam = f"samples/{sample}/whatshap/{sample}.{ref}.deepvariant.haplotagged.bam",
-        bai = f"samples/{sample}/whatshap/{sample}.{ref}.deepvariant.haplotagged.bam.bai",
+        bam = f"long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap_haplotagged.bam",
+        bai = f"long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap_haplotagged.bam.bai",
         bed = config['ref']['trgt_bed']
-    output: f"samples/{sample}/trgt/{sample}.{ref}.trgt.dropouts.txt"
-    log: f"samples/{sample}/logs/trgt/{sample}.dropouts.log"
-    benchmark: f"samples/{sample}/benchmarks/trgt/{sample}.dropouts.tsv"
+    output: f"long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.trgt.dropouts.txt"
+    log: f"long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.dropouts.log"
+    benchmark: f"long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.dropouts.tsv"
     conda: "envs/tandem-genotypes.yaml"
     message: "Executing {rule}: Identify coverage dropouts in {input.bed} regions in {input.bam}."
     shell: "(python3 workflow/scripts/check_trgt_coverage.py {input.bed} {input.bam} > {output}) > {log} 2>&1"
