@@ -10,8 +10,8 @@ ruleorder: trgt_genotype > bgzip_vcf
 rule trgt_genotype:
     input:
         reference=config['reference']['fasta'],
-        bam = f"long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam",
-        bai = f"long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam.bai",
+        bam = "long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam",
+        bai = "long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam.bai",
         bed = config['reference']['trgt_bed'],
     output:
         vcf = "long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.trgt.vcf.gz",
