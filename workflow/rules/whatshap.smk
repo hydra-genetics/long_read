@@ -30,7 +30,7 @@ rule whatshap_phase:
             --reference {input.reference} \
             {input.vcf} \
             {input.phaseinput}) > {log} 2>&1 && \
-        tabix -p vcf {output} >> {log} 2>&1
+        (tabix -p vcf {output}) >> {log} 2>&1
         """
 
 # whatshap phase -o phased.vcf --reference=reference.fasta input.vcf input.bam
