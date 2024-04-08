@@ -25,15 +25,16 @@ rule whatshap_phase:
         config.get("whatshap_phase", {}).get("container", config["default_container"])
     shell:
         """
+        # Phase with WhatsHap, outputting an uncompressed VCF
         (whatshap phase {params.extra} \
             --output {output} \
             --reference {input.reference} \
             {input.vcf} \
-            {input.phaseinput}) > {log} 2>&1 && \
+            {input.phaseinput}) > {log} 2>&1 
+
+        # Index the compressed VCF file with tabix
         (tabix -p vcf {output}) >> {log} 2>&1
         """
-
-# whatshap phase -o phased.vcf --reference=reference.fasta input.vcf input.bam
 
 
 
