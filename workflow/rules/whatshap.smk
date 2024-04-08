@@ -33,7 +33,7 @@ rule whatshap_phase:
             {input.phaseinput}) > {log} 2>&1 
 
         # Index the compressed VCF file with tabix
-        (tabix -p vcf {output}) >> {log} 2>&1
+        #(tabix -p vcf {output}) >> {log} 2>&1
         """
 
 
