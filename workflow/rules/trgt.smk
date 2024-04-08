@@ -4,7 +4,7 @@ __email__ = "magdalena.z@scilifelab.uu.se"
 __license__ = "GPL-3"
 
 
-ruleorder: trgt_genotype > bgzip_vcf
+#ruleorder: trgt_genotype > bgzip_vcf
 
 
 rule trgt_genotype:
