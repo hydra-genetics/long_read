@@ -47,7 +47,7 @@ rule trgt_coverage_dropouts:
     input:
         bam = "long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap_haplotagged.bam",
         bai = "long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap_haplotagged.bam.bai",
-        bed = config['reference']['trgt_bed'],
+        bed = config['trgt']['trgt_bed'],
     output: "long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.trgt.dropouts.txt",
     log: "long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.dropouts.log",
     benchmark: "long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.dropouts.tsv",
