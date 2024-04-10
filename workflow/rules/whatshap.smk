@@ -79,7 +79,7 @@ rule whatshap_index:
         threads=config.get("whatshap_haplotag", {}).get("threads", config["default_resources"]["threads"]),
         time=config.get("whatshap_haplotag", {}).get("time", config["default_resources"]["time"]),
     container:
-        config.get("whatshap_phase", {}).get("container", config["default_container"])
+        config.get("whatshap_index", {}).get("container", config["default_container"])
     wrapper:
         "v3.7.0/bio/samtools/index"
 
