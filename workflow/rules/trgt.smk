@@ -12,7 +12,7 @@ rule trgt_genotype:
         reference=config['reference']['fasta'],
         bam = "long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam",
         bai = "long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam.bai",
-        bed = config['reference']['trgt_bed'],
+        bed = config['trgt']['trgt_bed'],
     output:
         vcf = "long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.trgt.vcf.gz",
         bam = "long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.trgt.spanning.bam",
