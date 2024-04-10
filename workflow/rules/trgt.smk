@@ -45,16 +45,16 @@ rule trgt_genotype:
 
 rule trgt_coverage_dropouts:
     input:
-        bam = f"long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap_haplotagged.bam",
-        bai = f"long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap_haplotagged.bam.bai",
-        bed = config['reference']['trgt_bed']
-    output: f"long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.trgt.dropouts.txt"
-    log: f"long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.dropouts.log"
-    benchmark: f"long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.dropouts.tsv"
+        bam = "long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap_haplotagged.bam",
+        bai = "long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap_haplotagged.bam.bai",
+        bed = config['reference']['trgt_bed'],
+    output: "long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.trgt.dropouts.txt",
+    log: "long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.dropouts.log",
+    benchmark: "long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.dropouts.tsv",
     params:
         prefix = "long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.trgt",
         extra=config.get("trgt", {}).get("extra", ""),
-    threads: config.get("trgt", {}).get("threads", config["default_resources"]["threads"])
+    threads: config.get("trgt", {}).get("threads", config["default_resources"]["threads"]),
     resources:
         mem_mb=config.get("trgt", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
         mem_per_cpu=config.get("trgt", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
