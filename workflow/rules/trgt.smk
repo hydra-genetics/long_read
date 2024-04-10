@@ -38,6 +38,8 @@ rule trgt_genotype:
             --repeats {input.bed} \
             --reads {input.bam} \
             --output-prefix {params.prefix}) > {log} 2>&1
+        
+        touch {output.vcf} {output.bam} 
         """
 
 
