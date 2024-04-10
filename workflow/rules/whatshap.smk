@@ -80,7 +80,7 @@ rule whatshap_index:
         time=config.get("whatshap_haplotag", {}).get("time", config["default_resources"]["time"]),
     container:
         config.get("whatshap_phase", {}).get("container", config["default_container"])
-    shell:
-        """
-        samtools index {input} >> {log} 2>&1
-        """
+    wrapper:
+        "v3.7.0/bio/samtools/index"
+
+        
