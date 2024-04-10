@@ -59,6 +59,7 @@ wildcard_constraints:
 
 
 def pbmm2_input(wildcards):
+    print(units)
     input = get_units(units, wildcards)
     print("INPUT", input)
     if hasattr(input[0], "bam") and pandas.notna(input[0].bam):
