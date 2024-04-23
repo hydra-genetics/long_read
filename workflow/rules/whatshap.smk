@@ -5,8 +5,10 @@ rule whatshap_phase:
         reference=config['reference']['fasta'],
         vcf="parabricks/pbrun_deepvariant/{sample}_{type}_{flowcell}_{barcode}.deepvariant.g.vcf",
         tbi="parabricks/pbrun_deepvariant/{sample}_{type}_{flowcell}_{barcode}.deepvariant.g.vcf.idx",
-        phaseinput="long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam",
-        phaseinputindex="long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam.bai",
+        phaseinput="long_read/minimap2/{sample}_{type}_{flowcell}_{barcode}.mm2.bam",
+        phaseinputindex="long_read/minimap2/{sample}_{type}_{flowcell}_{barcode}.mm2.bam.bai",
+        #phaseinput="long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam",
+        #phaseinputindex="long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam.bai",
     output: 
         out="long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap.phased.vcf.gz",
         outindex="long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap.phased.vcf.gz.tbi",
