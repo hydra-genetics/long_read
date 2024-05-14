@@ -13,9 +13,12 @@ rule paraphase:
     input:
         bam="long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam",
         fasta=config.get("paraphase", {}).get("fasta", ""),
-        vcf_header=config.get("paraphase", {}).get("vcf_header", ""),
+        faidx=config.get("paraphase", {}).get("fai", ""),
     output:
         merged_vcf = "long_read/paraphase/{sample}_{type}_{flowcell}_{barcode}.paraphase.vcf.gz",
+        bam = "long_read/paraphase/{sample}_{type}_{flowcell}_{barcode}_realigned.paraphase.bam",
+        bai = "long_read/paraphase/{sample}_{type}_{flowcell}_{barcode}_realigned.paraphase.bam.bai",
+        vcf_header = "long_read/paraphase/{sample}_{type}_{flowcell}_{barcode}.vcf_chromosome_header.vcf",
     params:
         genome=config.get("paraphase", {}).get("genome", ""),
         extra=config.get("paraphase", {}).get("extra", ""),
@@ -37,11 +40,7 @@ rule paraphase:
         "{rule}: Calls SNVs on {input.bam} with paraphase to resolve SNVs in gene families"
     wrapper:
         "file:///beegfs-storage/projects/wp3/nobackup/Workspace/magz_testing/snakemake-wrappers/bio/paraphase"
-#    shell:
-#        "touch {output.merged_vcf} &> log"
-
-
-
+        # "ppp/bio/paraphase"
 
 
 
