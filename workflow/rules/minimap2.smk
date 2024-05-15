@@ -42,10 +42,13 @@ rule minimap2_index:
         "long_read/minimap2/{sample}_{type}_{flowcell}_{barcode}.bamindex.log",
     threads: config.get("minimap2", {}).get("threads", config["default_resources"]["threads"])
     resources:
-        mem_mb=config.get("minimap2", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
-        mem_per_cpu=config.get("minimap2", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
-        partition=config.get("minimap2", {}).get("partition", config["default_resources"]["partition"]),
-        threads=config.get("minimap2", {}).get("threads", config["default_resources"]["threads"]),
-        time=config.get("minimap2", {}).get("time", config["default_resources"]["time"]),
-    shell:
-        "samtools index {input.bam} &> log"
+        mem_mb=config.get("minimap2_index", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
+        mem_per_cpu=config.get("minimap2_index", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
+        partition=config.get("minimap2_index", {}).get("partition", config["default_resources"]["partition"]),
+        threads=config.get("minimap2_index", {}).get("threads", config["default_resources"]["threads"]),
+        time=config.get("minimap2_index", {}).get("time", config["default_resources"]["time"]),
+    #shell:
+    #    "samtools index {input.bam} &> log"
+    wrapper:
+        "v3.4.1/bio/samtools/index"
+
