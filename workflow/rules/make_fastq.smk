@@ -5,7 +5,7 @@ __email__ = "magdalena.z@scilifelab.uu.se"
 __license__ = "GPL-3"
 
 
-rule extract_fastq_from_bam:
+rule make_fastq:
     input:
         #query=lambda wildcards: get_minimap2_query(wildcards)
         query="long_read/minimap2/{sample}_{type}_{flowcell}_{barcode}.mm2.bam",
