@@ -11,7 +11,7 @@ rule extract_fastq_from_bam:
         query="long_read/minimap2/{sample}_{type}_{flowcell}_{barcode}.mm2.bam",
     output:
         #fastq="long_read/fastq/{sample}_{type}.fastq"
-        fastq="long_read/hifiasm/{sample}_{type}_{flowcell}_{barcode}.s2fq.fastq", 
+        fastq="long_read/hifiasm/{sample}_{type}_{flowcell}_{barcode}.s2fq.fastq.gz", 
     shell:
         """
         samtools fastq  -o  {output.fastq} {input.query}
