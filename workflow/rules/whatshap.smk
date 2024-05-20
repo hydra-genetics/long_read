@@ -40,10 +40,10 @@ rule whatshap_phase:
 rule whatshap_haplotag:
     input:
         "long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap.phased.vcf.gz.tbi",
-        "long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam.bai",
+        "long_read/minimap2/{sample}_{type}_{flowcell}_{barcode}.mm2.bam.bai",
         config['reference']['fai'],
         vcf="long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap.phased.vcf.gz",
-        aln="long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam",
+        aln="long_read/minimap2/{sample}_{type}_{flowcell}_{barcode}.mm2.bam",
         ref=config['reference']['fasta'],
     output:
         "long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap_haplotagged.bam"
