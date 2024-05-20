@@ -9,7 +9,8 @@ rule extract_fastq_from_bam:
     input:
         query=lambda wildcards: get_minimap2_query(wildcards)
     output:
-        fastq="long_read/fastq/{sample}_{type}.fastq"
+        #fastq="long_read/fastq/{sample}_{type}.fastq"
+        fastq="long_read/hifiasm/{sample}_{type}_{flowcell}_{barcode}.s2fq.fastq", 
     shell:
         """
         samtools fastq  -o  {output.fastq} {input.query}
