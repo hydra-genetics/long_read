@@ -25,7 +25,7 @@ if scripts_file_path not in sys.path:
 
 # Add the directory containing the module to the Python path
 if current_working_dir not in sys.path:
-    sys.path.insert(0, scripts_file_path2)
+    sys.path.insert(0, current_working_dir)
 
 # Import the function from the module
 from workflow.scripts.minimap2_get_readgroups import extract_rg_lines
