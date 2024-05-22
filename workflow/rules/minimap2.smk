@@ -8,14 +8,25 @@ import os
 import sys
 
 # Add the path to the Python module to sys.path
-module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
-if module_path not in sys.path:
-    sys.path.insert(0, module_path)
+#module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+#if module_path not in sys.path:
+#    sys.path.insert(0, module_path)
 
-print("MOD: ", module_path)
+# Get the directory of the current script
+current_script_dir = os.path.dirname(os.path.abspath(__file__))
+    
+# Construct the path to the Snakemake file
+snakemake_file_path = os.path.join(current_script_dir, '..', 'workflow', 'Snakefile')
+    
+# Normalize the path to remove any redundant separators
+#snakemake_file_path = os.path.normpath(snakemake_file_path)
+#    return snakemake_file_path
+
+print("MOD: ", snakemake_file_path)
+
 
 # Import the function from the module
-from workflow.scripts.minimap2_get_readgroups import extract_rg_lines
+# from workflow.scripts.minimap2_get_readgroups import extract_rg_lines
 
 
 
