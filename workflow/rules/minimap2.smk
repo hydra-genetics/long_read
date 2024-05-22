@@ -35,10 +35,16 @@ if current_working_dir not in sys.path:
 # Import the function from the module
 try:
     from workflow.scripts.minimap2_get_readgroups import extract_rg_lines
+except:
+    pass
 try:
     from scripts.minimap2_get_readgroups import extract_rg_lines
+except:
+    pass
 try:
     from minimap2_get_readgroups import extract_rg_lines
+except:
+    pass
 
 rule minimap2:
     input:
