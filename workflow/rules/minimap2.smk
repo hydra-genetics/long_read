@@ -3,24 +3,17 @@ __copyright__ = "Copyright 2023, Patrik Smeds"
 __email__ = "patrik.smeds@scilifelab.uu.se"
 __license__ = "GPL-3"
 
-
 import os
-import sys
+from pathlib import Path
 
-# Add the path to the Python module to sys.path
-#module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
-#if module_path not in sys.path:
-#    sys.path.insert(0, module_path)
-
-# Get the directory of the current script
-current_script_dir = os.path.dirname(os.path.abspath(__file__))
+# Get the current working directory
+current_working_dir = Path.cwd()
     
-# Construct the path to the Snakemake file
-snakemake_file_path = os.path.join(current_script_dir, '..', 'workflow', 'Snakefile')
+# Construct the path to the Snakefile
+snakemake_file_path = current_working_dir / 'workflow' / 'scripts'
     
 # Normalize the path to remove any redundant separators
-#snakemake_file_path = os.path.normpath(snakemake_file_path)
-#    return snakemake_file_path
+snakemake_file_path = snakemake_file_path.resolve()
 
 print("MOD: ", snakemake_file_path)
 
