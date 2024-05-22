@@ -19,7 +19,7 @@ print("MOD: ", scripts_file_path)
 
 # Add the directory containing the module to the Python path
 if scripts_file_path not in sys.path:
-    sys.path.insert(0, module_path)
+    sys.path.insert(0, scripts_file_path)
 
 # Import the function from the module
 from scripts.minimap2_get_readgroups import extract_rg_lines
