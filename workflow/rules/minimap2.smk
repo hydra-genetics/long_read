@@ -7,8 +7,9 @@ import os
 from pathlib import Path
 
 # Get the current working directory
-current_working_dir = Path.cwd() / 'workflow' 
-
+current_working_dir1 = Path.cwd() 
+current_working_dir2 = Path.cwd() / 'workflow' 
+current_working_dir3 = Path.cwd() / 'workflow'  / 'scripts'
 '''    
 # Construct the path to the Snakefile
 scripts_file_path = current_working_dir / 'workflow' / 'scripts'
@@ -23,16 +24,21 @@ if scripts_file_path not in sys.path:
     sys.path.insert(0, scripts_file_path)
 '''
 
-print("MOD: ", current_working_dir)
+print("MOD: ", current_working_dir1,  current_working_dir2, current_working_dir3 )
 
 # Add the directory containing the module to the Python path
 if current_working_dir not in sys.path:
-    sys.path.insert(0, current_working_dir)
+    sys.path.insert(0, current_working_dir1)
+    sys.path.insert(0, current_working_dir2)
+    sys.path.insert(0, current_working_dir3)
 
 # Import the function from the module
-from workflow.scripts.minimap2_get_readgroups import extract_rg_lines
-
-
+try:
+    from workflow.scripts.minimap2_get_readgroups import extract_rg_lines
+try:
+    from scripts.minimap2_get_readgroups import extract_rg_lines
+try:
+    from minimap2_get_readgroups import extract_rg_lines
 
 rule minimap2:
     input:
