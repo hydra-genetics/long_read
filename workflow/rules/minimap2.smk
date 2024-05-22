@@ -4,6 +4,19 @@ __email__ = "patrik.smeds@scilifelab.uu.se"
 __license__ = "GPL-3"
 
 
+import os
+import sys
+
+# Add the path to the Python module to sys.path
+module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+if module_path not in sys.path:
+    sys.path.insert(0, module_path)
+
+# Import the function from the module
+from workflow.scripts.minimap2_get_readgroups import extract_rg_lines
+
+
+
 rule minimap2:
     input:
         query=lambda wildcards: get_minimap2_query(wildcards),
@@ -15,6 +28,7 @@ rule minimap2:
         extra=config.get("minimap2", {}).get("extra", ""),
         sorting=config.get("minimap2", {}).get("sorting", ""),
         sorting_extra=config.get("minimap2", {}).get("sorting_extra", ""),
+        extra_rg=minimap2_get_readgroups.extract_rg_lines(query)
     log:
         "long_read/minimap2/{sample}_{type}_{flowcell}_{barcode}.bam.log",
     benchmark:
