@@ -7,7 +7,7 @@ import os
 from pathlib import Path
 
 # Get the current working directory
-current_working_dir = Path.cwd()
+current_working_dir = Path.cwd() / 'workflow' 
 
 '''    
 # Construct the path to the Snakefile
