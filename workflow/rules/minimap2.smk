@@ -13,9 +13,9 @@ current_working_dir = Path.cwd()
 scripts_file_path = current_working_dir / 'workflow' / 'scripts'
     
 # Normalize the path to remove any redundant separators
-scripts_file_path = snakemake_file_path.resolve()
+scripts_file_path = scripts_file_path.resolve()
 
-print("MOD: ", snakemake_file_path)
+print("MOD: ", scripts_file_path)
 
 # Add the directory containing the module to the Python path
 if scripts_file_path not in sys.path:
