@@ -12,6 +12,8 @@ module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'
 if module_path not in sys.path:
     sys.path.insert(0, module_path)
 
+print("MOD: ", module_path)
+
 # Import the function from the module
 from workflow.scripts.minimap2_get_readgroups import extract_rg_lines
 
