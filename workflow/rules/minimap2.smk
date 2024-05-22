@@ -27,7 +27,7 @@ if scripts_file_path not in sys.path:
 print("MOD: ", current_working_dir1,  current_working_dir2, current_working_dir3 )
 
 # Add the directory containing the module to the Python path
-if current_working_dir not in sys.path:
+if current_working_dir1 not in sys.path:
     sys.path.insert(0, current_working_dir1)
     sys.path.insert(0, current_working_dir2)
     sys.path.insert(0, current_working_dir3)
