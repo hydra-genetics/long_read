@@ -6,8 +6,8 @@ __license__ = "GPL-3"
 
 rule sniffles:
     input:
-        bam="long_read/minimap2/{sample}_{type}_{flowcell}_{barcode}.mm2.bam",
-        bai="long_read/minimap2/{sample}_{type}_{flowcell}_{barcode}.mm2.bam.bai",
+        bam="alignment/minimap2/{sample}_{type}_{flowcell}_{barcode}.mm2.bam",
+        bai="alignment/minimap2/{sample}_{type}_{flowcell}_{barcode}.mm2.bam.bai",
         #bam="long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam",
         #bai="long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam.bai",
         fasta=config.get("reference", {}).get("fasta", ""),
