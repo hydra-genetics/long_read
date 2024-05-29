@@ -10,18 +10,18 @@ __license__ = "GPL-3"
 rule trgt_genotype:
     input:
         reference=config['reference']['fasta'],
-        bam="alignment/minimap2/{sample}_{type}_{flowcell}_{barcode}.mm2.bam",
-        bai="alignment/minimap2/{sample}_{type}_{flowcell}_{barcode}.mm2.bam.bai",
-        #bam = "long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam",
-        #bai = "long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam.bai",
+        bam="alignment/minimap2/{sample}_{type}_{processing_unit}_{barcode}.mm2.bam",
+        bai="alignment/minimap2/{sample}_{type}_{processing_unit}_{barcode}.mm2.bam.bai",
+        #bam = "long_read/pbmm2_align/{sample}_{type}_{processing_unit}_{barcode}.pbmm2.sort.bam",
+        #bai = "long_read/pbmm2_align/{sample}_{type}_{processing_unit}_{barcode}.pbmm2.sort.bam.bai",
         bed = config['trgt']['trgt_bed'],
     output:
-        vcf = "long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.trgt.vcf.gz",
-        bam = "long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.trgt.spanning.bam",
-    log: "long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.genotype.log",
-    benchmark: "long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.genotype.tsv",
+        vcf = "long_read/trgt/{sample}_{type}_{processing_unit}_{barcode}.trgt.vcf.gz",
+        bam = "long_read/trgt/{sample}_{type}_{processing_unit}_{barcode}.trgt.spanning.bam",
+    log: "long_read/trgt/{sample}_{type}_{processing_unit}_{barcode}.genotype.log",
+    benchmark: "long_read/trgt/{sample}_{type}_{processing_unit}_{barcode}.genotype.tsv",
     params:
-        prefix = "long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.trgt",
+        prefix = "long_read/trgt/{sample}_{type}_{processing_unit}_{barcode}.trgt",
         extra=config.get("whatshap_phase", {}).get("extra", ""),
     threads: config.get("whatshap_phase", {}).get("threads", config["default_resources"]["threads"])
     resources:
@@ -47,14 +47,14 @@ rule trgt_genotype:
 
 rule trgt_coverage_dropouts:
     input:
-        bam = "long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap_haplotagged.bam",
-        bai = "long_read/whatshap/{sample}_{type}_{flowcell}_{barcode}.whatshap_haplotagged.bam.bai",
+        bam = "long_read/whatshap/{sample}_{type}_{processing_unit}_{barcode}.whatshap_haplotagged.bam",
+        bai = "long_read/whatshap/{sample}_{type}_{processing_unit}_{barcode}.whatshap_haplotagged.bam.bai",
         bed = config['trgt']['trgt_bed'],
-    output: "long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.trgt.dropouts.txt",
-    log: "long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.dropouts.log",
-    benchmark: "long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.dropouts.tsv",
+    output: "long_read/trgt/{sample}_{type}_{processing_unit}_{barcode}.trgt.dropouts.txt",
+    log: "long_read/trgt/{sample}_{type}_{processing_unit}_{barcode}.dropouts.log",
+    benchmark: "long_read/trgt/{sample}_{type}_{processing_unit}_{barcode}.dropouts.tsv",
     params:
-        prefix = "long_read/trgt/{sample}_{type}_{flowcell}_{barcode}.trgt",
+        prefix = "long_read/trgt/{sample}_{type}_{processing_unit}_{barcode}.trgt",
         extra=config.get("trgt", {}).get("extra", ""),
     threads: config.get("trgt", {}).get("threads", config["default_resources"]["threads"]),
     resources:
