@@ -38,7 +38,7 @@ rule whatshap_phase:
 rule whatshap_haplotag:
     input:
         "long_read/whatshap/{sample}_{type}_{processing_unit}_{barcode}.whatshap.phased.vcf.gz.tbi",
-        "long_read/minimap2/{sample}_{type}_{processing_unit}_{barcode}.bam.bai",
+        "alignment/minimap2/{sample}_{type}_{processing_unit}_{barcode}.bam.bai",
         config['reference']['fai'],
         vcf="long_read/whatshap/{sample}_{type}_{processing_unit}_{barcode}.whatshap.phased.vcf.gz",
         aln="alignment/minimap2/{sample}_{type}_{processing_unit}_{barcode}.bam",
