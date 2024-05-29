@@ -4,7 +4,7 @@ rule whatshap_phase:
     input:
         reference=config['reference']['fasta'],
         vcf="parabricks/pbrun_deepvariant/{sample}_{type}_{processing_unit}_{barcode}.deepvariant.g.vcf",
-        tbi="parabricks/pbrun_deepvariant/{sample}_{type}_{processing_unit}_{barcode}.deepvariant.g.vcf.idx",
+        #tbi="parabricks/pbrun_deepvariant/{sample}_{type}_{processing_unit}_{barcode}.deepvariant.g.vcf.idx",
         phaseinput="alignment/minimap2/{sample}_{type}_{processing_unit}_{barcode}.bam",
         phaseinputindex="alignment/minimap2/{sample}_{type}_{processing_unit}_{barcode}.bam.bai",
     output: 
