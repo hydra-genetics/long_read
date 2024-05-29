@@ -6,20 +6,20 @@ __license__ = "GPL-3"
 
 rule sniffles:
     input:
-        bam="alignment/minimap2/{sample}_{type}_{flowcell}_{barcode}.mm2.bam",
-        bai="alignment/minimap2/{sample}_{type}_{flowcell}_{barcode}.mm2.bam.bai",
-        #bam="long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam",
-        #bai="long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.pbmm2.sort.bam.bai",
+        bam="alignment/minimap2/{sample}_{type}_{processing_unit}_{barcode}.mm2.bam",
+        bai="alignment/minimap2/{sample}_{type}_{processing_unit}_{barcode}.mm2.bam.bai",
+        #bam="long_read/pbmm2_align/{sample}_{type}_{processing_unit}_{barcode}.pbmm2.sort.bam",
+        #bai="long_read/pbmm2_align/{sample}_{type}_{processing_unit}_{barcode}.pbmm2.sort.bam.bai",
         fasta=config.get("reference", {}).get("fasta", ""),
     output:
-        vcf="long_read/sniffles/{sample}_{type}_{flowcell}_{barcode}.vcf.gz",
-        snf="long_read/sniffles/{sample}_{type}_{flowcell}_{barcode}.snf",
+        vcf="long_read/sniffles/{sample}_{type}_{processing_unit}_{barcode}.vcf.gz",
+        snf="long_read/sniffles/{sample}_{type}_{processing_unit}_{barcode}.snf",
     params:
         extra=config.get("sniffles", {}).get("extra", ""),
     log:
-        "long_read/sniffles/{sample}_{type}_{flowcell}_{barcode}.vcf.log",
+        "long_read/sniffles/{sample}_{type}_{processing_unit}_{barcode}.vcf.log",
     benchmark:
-        repeat("long_read/sniffles/{sample}_{type}_{flowcell}_{barcode}.vcf.benchmark.tsv", config.get("sniffles", {}).get("benchmark_repeats", 1))
+        repeat("long_read/sniffles/{sample}_{type}_{processing_unit}_{barcode}.vcf.benchmark.tsv", config.get("sniffles", {}).get("benchmark_repeats", 1))
     threads: config.get("sniffles", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("sniffles", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
