@@ -11,8 +11,8 @@ GENE = ["smn1","CR1","AMY1A","CTAG1A","BOLA2"]
 
 rule paraphase:
     input:
-        bam="alignment/minimap2/{sample}_{type}_{processing_unit}_{barcode}.mm2.bam",  
-        bai="alignment/minimap2/{sample}_{type}_{processing_unit}_{barcode}.mm2.bam.bai",
+        bam="alignment/minimap2/{sample}_{type}_{processing_unit}_{barcode}.bam",  
+        bai="alignment/minimap2/{sample}_{type}_{processing_unit}_{barcode}.bam.bai",
         fasta=config.get("paraphase", {}).get("fasta", ""),
         faidx=config.get("paraphase", {}).get("fai", ""),
     output:
