@@ -11,23 +11,23 @@ GENE = ["smn1","CR1","AMY1A","CTAG1A","BOLA2"]
 
 rule paraphase:
     input:
-        bam="alignment/minimap2/{sample}_{type}_{flowcell}_{barcode}.mm2.bam",  
-        bai="alignment/minimap2/{sample}_{type}_{flowcell}_{barcode}.mm2.bam.bai",
+        bam="alignment/minimap2/{sample}_{type}_{processing_unit}_{barcode}.mm2.bam",  
+        bai="alignment/minimap2/{sample}_{type}_{processing_unit}_{barcode}.mm2.bam.bai",
         fasta=config.get("paraphase", {}).get("fasta", ""),
         faidx=config.get("paraphase", {}).get("fai", ""),
     output:
-        merged_vcf = "long_read/paraphase/{sample}_{type}_{flowcell}_{barcode}.paraphase.vcf.gz",
-        bam = "long_read/paraphase/{sample}_{type}_{flowcell}_{barcode}_realigned.paraphase.bam",
-        bai = "long_read/paraphase/{sample}_{type}_{flowcell}_{barcode}_realigned.paraphase.bam.bai",
-        vcf_header = "long_read/paraphase/{sample}_{type}_{flowcell}_{barcode}.vcf_chromosome_header.vcf",
+        merged_vcf = "long_read/paraphase/{sample}_{type}_{processing_unit}_{barcode}.paraphase.vcf.gz",
+        bam = "long_read/paraphase/{sample}_{type}_{processing_unit}_{barcode}_realigned.paraphase.bam",
+        bai = "long_read/paraphase/{sample}_{type}_{processing_unit}_{barcode}_realigned.paraphase.bam.bai",
+        vcf_header = "long_read/paraphase/{sample}_{type}_{processing_unit}_{barcode}.vcf_chromosome_header.vcf",
     params:
         genome=config.get("paraphase", {}).get("genome", ""),
         extra=config.get("paraphase", {}).get("extra", ""),
         outfolder=directory("long_read/paraphase/"),
     log:
-        "long_read/paraphase/{sample}_{type}_{flowcell}_{barcode}.paraphase.log",
+        "long_read/paraphase/{sample}_{type}_{processing_unit}_{barcode}.paraphase.log",
     benchmark:
-        repeat("long_read/paraphase/{sample}_{type}_{flowcell}_{barcode}.out.benchmark.tsv", config.get("paraphase", {}).get("benchmark_repeats", 1))
+        repeat("long_read/paraphase/{sample}_{type}_{processing_unit}_{barcode}.out.benchmark.tsv", config.get("paraphase", {}).get("benchmark_repeats", 1))
     threads: config.get("paraphase", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("paraphase", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
