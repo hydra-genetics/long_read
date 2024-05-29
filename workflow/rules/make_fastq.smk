@@ -8,12 +8,12 @@ __license__ = "GPL-3"
 rule make_fastq:
     input:
         #query=lambda wildcards: get_minimap2_query(wildcards)
-        query="long_read/minimap2/{sample}_{type}_{flowcell}_{barcode}.mm2.bam",
+        query="long_read/minimap2/{sample}_{type}_{processing_unit}_{barcode}.mm2.bam",
     output:
         #fastq="long_read/fastq/{sample}_{type}.fastq"
-        fastq="long_read/hifiasm/{sample}_{type}_{flowcell}_{barcode}.s2fq.fastq.gz", 
+        fastq="long_read/hifiasm/{sample}_{type}_{processing_unit}_{barcode}.s2fq.fastq.gz", 
     log:
-        "long_read/hifiasm/{sample}_{type}_{flowcell}_{barcode}.interleaved.log",
+        "long_read/hifiasm/{sample}_{type}_{processing_unit}_{barcode}.interleaved.log",
     message:
         "Extracting fastq reads from BAM file"
     # Samtools takes additional threads through its option -@
