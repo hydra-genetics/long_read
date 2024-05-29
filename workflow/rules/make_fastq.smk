@@ -8,7 +8,7 @@ __license__ = "GPL-3"
 rule make_fastq:
     input:
         #query=lambda wildcards: get_minimap2_query(wildcards)
-        query="long_read/minimap2/{sample}_{type}_{processing_unit}_{barcode}.bam",
+        query="alignment/minimap2/{sample}_{type}_{processing_unit}_{barcode}.bam",
     output:
         #fastq="long_read/fastq/{sample}_{type}.fastq"
         fastq="long_read/hifiasm/{sample}_{type}_{processing_unit}_{barcode}.s2fq.fastq.gz", 
