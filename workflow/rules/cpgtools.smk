@@ -8,36 +8,41 @@ rule cpgtools_aligned_bam_to_cpg_scores:
     input:
         bai=config.get("pbmm2_align", {}).get("index", ""),
         bam=pbmm2_input,
-        output-prefix={sample}_{type}_{processing_unit}_{barcode},
-
     output:
-        bam="long_read/pbmm2_align/{sample}_{type}_{processing_unit}_{barcode}.pbmm2.bam",
+        output-prefix={sample}_{type}_{processing_unit}_{barcode},
+        outbed="{output-prefix}.combined.bed",
+        outcov="{output-prefix}.combined.bw",
+        #bam="long_read/pbmm2_align/{sample}_{type}_{processing_unit}_{barcode}.pbmm2.bam",
     params:
         preset=config.get("cpgtools_aligned_bam_to_cpg_scores", {}).get("preset", ""),
         model=config.get("cpgtools_aligned_bam_to_cpg_scores", {}).get("model", ""),
         sample=lambda wildcards: wildcards.sample,
-        loglevel="INFO",
-        extra=config.get("pbmm2_align", {}).get("extra", ""),
+        extra=config.get("cpgtools_aligned_bam_to_cpg_score", {}).get("extra", ""),
     log:
-        bam="long_read/pbmm2_align/{sample}_{type}_{processing_unit}_{barcode}.bam.log",
+        bam="long_read/cpgtools/{sample}_{type}_{processing_unit}_{barcode}.bam.log",
     benchmark:
         repeat(
-            "long_read/pbmm2_align/{sample}_{type}_{processing_unit}_{barcode}.bam.benchmark.tsv",
-            config.get("pbmm2_align", {}).get("benchmark_repeats", 1),
+            "long_read/cpgtools/{sample}_{type}_{processing_unit}_{barcode}.bam.benchmark.tsv",
+            config.get("cpgtools_aligned_bam_to_cpg_scores", {}).get("benchmark_repeats", 1),
         )
-    threads: config.get("pbmm2_align", {}).get("threads", config["default_resources"]["threads"])
+    threads: config.get("cpgtools_aligned_bam_to_cpg_scores", {}).get("threads", config["default_resources"]["threads"])
     resources:
-        mem_mb=config.get("pbmm2_align", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
-        mem_per_cpu=config.get("pbmm2_align", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
-        partition=config.get("pbmm2_align", {}).get("partition", config["default_resources"]["partition"]),
-        threads=config.get("pbmm2_align", {}).get("threads", config["default_resources"]["threads"]),
-        time=config.get("pbmm2_align", {}).get("time", config["default_resources"]["time"]),
+        mem_mb=config.get("cpgtools_aligned_bam_to_cpg_scores", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
+        mem_per_cpu=config.get("cpgtools_aligned_bam_to_cpg_scores", {}).get("mem_per_cpu", config["default_resources"]["mem_per_cpu"]),
+        partition=config.get("cpgtools_aligned_bam_to_cpg_scores", {}).get("partition", config["default_resources"]["partition"]),
+        threads=config.get("cpgtools_aligned_bam_to_cpg_scores", {}).get("threads", config["default_resources"]["threads"]),
+        time=config.get("cpgtools_aligned_bam_to_cpg_scores", {}).get("time", config["default_resources"]["time"]),
     container:
-        config.get("pbmm2_align", {}).get("container", config["default_container"])
+        config.get("cpgtools_aligned_bam_to_cpg_scores", {}).get("container", config["default_container"])
     message:
-        "{rule}: Align reads in {input.query} against {input.reference}"
-    wrapper:
-        "v1.28.0/bio/pbmm2/align"
+        "{rule}: Identify methylated regions in {input.bam}"
+    shell:
+        "pb-CpG-tools-v2.3.2-x86_64-unknown-linux-gnu/bin/aligned_bam_to_cpg_scores "
+        "--bam {input.bam} "
+        "--output-prefix {output.prefix} "
+        "--model {params.model} "
+        "-s {params.umi_strategy} "
+        "{params.extra}) &> {log}"
 
 
 
