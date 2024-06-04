@@ -13,7 +13,6 @@ rule cpgtools_aligned_bam_to_cpg_scores:
         outbed="{output-prefix}.combined.bed",
         outcov="{output-prefix}.combined.bw",
     params:
-        preset=config.get("cpgtools_aligned_bam_to_cpg_scores", {}).get("preset", ""),
         model=config.get("cpgtools_aligned_bam_to_cpg_scores", {}).get("model", ""),
         sample=lambda wildcards: wildcards.sample,
         extra=config.get("cpgtools_aligned_bam_to_cpg_score", {}).get("extra", ""),
