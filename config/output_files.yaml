@@ -10,4 +10,11 @@ files:
   - name: "_copy_minimap2_tsv"
     output: "result/{sample}_{type}.output.minimap2.bam"
     input: "long_read/minimap2/{sample}_{type}.bam"
+
+  - name: "_copy_automap_pdf"
+    input: "results/cnv_sv/{sample}_{type}_{flowcell}_{barcode}/{sample}_{type}_{flowcell}_{barcode}.HomRegions.pdf"
+    output: "results/cnv_sv/{sample}_{type}_{flowcell}_{barcode}/{sample}_{type}_{flowcell}_{barcode}.HomRegions.pdf"
     
+  - name: "_copy_automap_tsv"
+    input: "cnv_sv/cnv_sv/{sample}_{type}_{flowcell}_{barcode}/{sample}_{type}_{flowcell}_{barcode}.HomRegions.tsv"
+    output: "results/cnv_sv/{sample}_{type}_{flowcell}_{barcode}/{sample}_{type}_{flowcell}_{barcode}.HomRegions.tsv"
