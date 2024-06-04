@@ -18,3 +18,12 @@ files:
   - name: "_copy_automap_tsv"
     input: "cnv_sv/cnv_sv/{sample}_{type}_{flowcell}_{barcode}/{sample}_{type}_{flowcell}_{barcode}.HomRegions.tsv"
     output: "results/cnv_sv/{sample}_{type}_{flowcell}_{barcode}/{sample}_{type}_{flowcell}_{barcode}.HomRegions.tsv"
+
+  - name: "_copy_cpgtools_bed"
+    input: "long_read/cpgtools/{sample}_{type}_{processing_unit}_{barcode}.combined.bed",
+    output: "results/{sample}_{type}_{processing_unit}_{barcode}.combined.bed",
+    
+  - name: "_copy_cpgtools_bw"
+    input: "long_read/cpgtools/{sample}_{type}_{processing_unit}_{barcode}.combined.bw",
+    output: "results/{sample}_{type}_{processing_unit}_{barcode}.combined.bw",
+    
