@@ -9,10 +9,9 @@ rule cpgtools_aligned_bam_to_cpg_scores:
         bai=config.get("pbmm2_align", {}).get("index", ""),
         bam=pbmm2_input,
     output:
-        output-prefix={sample}_{type}_{processing_unit}_{barcode},
+        output-prefix=long_read/cpgtools/{sample}_{type}_{processing_unit}_{barcode},
         outbed="{output-prefix}.combined.bed",
         outcov="{output-prefix}.combined.bw",
-        #bam="long_read/pbmm2_align/{sample}_{type}_{processing_unit}_{barcode}.pbmm2.bam",
     params:
         preset=config.get("cpgtools_aligned_bam_to_cpg_scores", {}).get("preset", ""),
         model=config.get("cpgtools_aligned_bam_to_cpg_scores", {}).get("model", ""),
@@ -41,7 +40,7 @@ rule cpgtools_aligned_bam_to_cpg_scores:
         "--bam {input.bam} "
         "--output-prefix {output.prefix} "
         "--model {params.model} "
-        "-s {params.umi_strategy} "
+        "--threads {threads} "
         "{params.extra}) &> {log}"
 
 
@@ -50,6 +49,9 @@ rule cpgtools_aligned_bam_to_cpg_scores:
 
 
 '''
+
+Data: https://downloads.pacbcloud.com/public/dataset/HG002-CpG-methylation-202202/HG002.GRCh38.haplotagged.bam 
+
 pb-CpG-tools-v2.3.2-x86_64-unknown-linux-gnu/bin/aligned_bam_to_cpg_scores \
   --bam HG002.hg38.pbmm2.bam \
   --output-prefix HG002.hg38.pbmm2 \
