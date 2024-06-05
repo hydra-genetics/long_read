@@ -5,8 +5,10 @@ __license__ = "GPL-3"
 
 rule cpgtools_aligned_bam_to_cpg_scores:
     input:
-        bai=config.get("pbmm2_align", {}).get("index", ""),
-        bam=pbmm2_input
+        #bai=config.get("pbmm2_align", {}).get("index", ""),
+        #bam=pbmm2_input
+        bam="alignment/minimap2/{sample}_{type}_{processing_unit}_{barcode}.bam",
+        bai="alignment/minimap2/{sample}_{type}_{processing_unit}_{barcode}.bam.bai",
     output:
         outbed="long_read/cpgtools/{sample}_{type}_{processing_unit}_{barcode}.combined.bed",
         outcov="long_read/cpgtools/{sample}_{type}_{processing_unit}_{barcode}.combined.bw"
