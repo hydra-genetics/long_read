@@ -119,7 +119,7 @@ def compile_paraphrase_file_list(wildcards):
 
 
 
-
+'''
 def generate_copy_rules(output_spec):
     output_directory = pathlib.Path(output_spec.get("directory", "./"))
     rulestrings = []
@@ -163,7 +163,7 @@ def generate_copy_rules(output_spec):
         rulestrings.append(rule_code)
 
     exec(compile("\n".join(rulestrings), "copy_result_files", "exec"), workflow.globals)
-
+'''
 
 def get_minimap2_query(wildcards):
     input = get_units(units, wildcards)
