@@ -18,6 +18,8 @@ rule make_fastq:
         "Extracting fastq reads from BAM file"
     # Samtools takes additional threads through its option -@
     threads: config.get("make_fastq", {}).get("threads", config["default_resources"]["threads"]),  # This value - 1 will be sent to -@
+    container:
+        config.get("make_fastq", {}).get("container", config["default_container"]),
     resources:
         partition=config.get("make_fastq", {}).get("partition", config["default_resources"]["partition"]),
         time=config.get("make_fastq", {}).get("time", config["default_resources"]["time"]),
