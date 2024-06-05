@@ -8,7 +8,7 @@ rule cpgtools_aligned_bam_to_cpg_scores:
         bai=config.get("pbmm2_align", {}).get("index", ""),
         bam=pbmm2_input,
     output:
-        output-prefix=long_read/cpgtools/{sample}_{type}_{processing_unit}_{barcode},
+        output-prefix="long_read/cpgtools/{sample}_{type}_{processing_unit}_{barcode}",
         outbed="{output-prefix}.combined.bed",
         outcov="{output-prefix}.combined.bw",
     params:
