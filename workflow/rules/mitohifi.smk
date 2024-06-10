@@ -1,5 +1,7 @@
-
-
+__author__ = "Magdalena Zarowiecki"
+__copyright__ = "Copyright 2023, Uppsala Universitet"
+__email__ = "magdalena.z@scilifelab.uu.se"
+__license__ = "GPL-3"
 
 # Snakefile
 
@@ -48,4 +50,6 @@ rule run_mitohifi:
 
 # Use ruleorder if needed to prioritize certain rules
 ruleorder: run_deepvariant > run_mitohifi
+
+
 
