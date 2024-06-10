@@ -1,12 +1,9 @@
-__author__ = "Magdalena Zarowiecki"
-__copyright__ = "Copyright 2023, Uppsala Universitet"
+__copyright__ = "Copyright 2024, Uppsala Universitet"
 __email__ = "magdalena.z@scilifelab.uu.se"
 __license__ = "GPL-3"
 
-# Snakefile
 
-# Load configuration
-configfile: "config.yaml"
+
 
 # Rule for running Parabricks DeepVariant
 rule run_deepvariant:
@@ -33,7 +30,7 @@ rule run_deepvariant:
 # Rule for running MitoHiFi with Docker
 rule run_mitohifi:
     input:
-        fasta="path/to/input.fasta"  # Replace with actual input
+        fasta=config['parabricks']['reference']  # Replace with actual input
     output:
         outdir="path/to/output_dir"  # Replace with actual output directory
     params:
