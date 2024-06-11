@@ -3,15 +3,15 @@
 rule whatshap_phase:
     input:
         reference=config['reference']['fasta'],
-        vcf="parabricks/pbrun_deepvariant/{sample}_{type}_{processing_unit}_{barcode}.deepvariant.g.vcf",
-        #tbi="parabricks/pbrun_deepvariant/{sample}_{type}_{processing_unit}_{barcode}.deepvariant.g.vcf.idx",
-        phaseinput="alignment/minimap2/{sample}_{type}_{processing_unit}_{barcode}.bam",
-        phaseinputindex="alignment/minimap2/{sample}_{type}_{processing_unit}_{barcode}.bam.bai",
+        vcf="parabricks/pbrun_deepvariant/{sample}_{type}.deepvariant.g.vcf",
+        {tbi="parabricks/pbrun_deepvariant/{sample}_{type}.deepvariant.g.vcf.idx",
+        phaseinput="alignment/minimap2/{sample}_{type}.bam",
+        phaseinputindex="alignment/minimap2/{sample}_{type}.bam.bai",
     output: 
-        out="long_read/whatshap/{sample}_{type}_{processing_unit}_{barcode}.whatshap.phased.vcf.gz",
-        outindex="long_read/whatshap/{sample}_{type}_{processing_unit}_{barcode}.whatshap.phased.vcf.gz.tbi",
-    log: "long_read/whatshap/{sample}_{type}_{processing_unit}_{barcode}.whatshap.phased.log",
-    benchmark: "long_read/whatshap/{sample}_{type}_{processing_unit}_{barcode}.whatshap.phased.tsv",
+        out="long_read/whatshap/{sample}_{type}.whatshap.phased.vcf.gz",
+        outindex="long_read/whatshap/{sample}_{type}.whatshap.phased.vcf.gz.tbi",
+    log: "long_read/whatshap/{sample}_{type}.whatshap.phased.log",
+    benchmark: "long_read/whatshap/{sample}_{type}.whatshap.phased.tsv",
     params:
         extra=config.get("whatshap_phase", {}).get("extra", ""),
     threads: config.get("whatshap_phase", {}).get("threads", config["default_resources"]["threads"])
@@ -28,27 +28,26 @@ rule whatshap_phase:
         (whatshap phase {params.extra} \
             --output {output.out} \
             --reference {input.reference} \
-            {input.vcf} \
+            {input.vcf} \      
             {input.phaseinput}) > {log} 2>&1 && \
-        tabix -p vcf {output.out} >> {log} 2>&1
+            tabix -p vcf {output.out} >> {log} 2>&1
         """
-
 
 
 rule whatshap_haplotag:
     input:
-        "long_read/whatshap/{sample}_{type}_{processing_unit}_{barcode}.whatshap.phased.vcf.gz.tbi",
-        "alignment/minimap2/{sample}_{type}_{processing_unit}_{barcode}.bam.bai",
+        "long_read/whatshap/{sample}_{type}.whatshap.phased.vcf.gz.tbi",
+        "alignment/minimap2/{sample}_{type}.bam.bai",
         config['reference']['fai'],
-        vcf="long_read/whatshap/{sample}_{type}_{processing_unit}_{barcode}.whatshap.phased.vcf.gz",
-        aln="alignment/minimap2/{sample}_{type}_{processing_unit}_{barcode}.bam",
+        vcf="long_read/whatshap/{sample}_{type}.whatshap.phased.vcf.gz",
+        aln="alignment/minimap2/{sample}_{type}.bam",
         ref=config['reference']['fasta'],
     output:
-        "long_read/whatshap/{sample}_{type}_{processing_unit}_{barcode}.whatshap_haplotagged.bam"
+        "long_read/whatshap/{sample}_{type}.whatshap_haplotagged.bam"
     params:
-        extra=config.get("whatshap_haplotag", {}).get("extra", ""), # optionally use --ignore-linked-read, --tag-supplementary, etc.
+        extra=config.get("whatshap_haplotag", {}).get("extra", ""), { optionally use --ignore-linked-read, --tag-supplementary, etc.
     log:
-        "long_read/whatshap/{sample}_{type}_{processing_unit}_{barcode}.whatshap_haplotagged.log"
+        "long_read/whatshap/{sample}_{type}.whatshap_haplotagged.log"
     threads: config.get("whatshap_haplotag", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("whatshap_haplotag", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -64,13 +63,13 @@ rule whatshap_haplotag:
 
 rule whatshap_index:
     input:
-        "long_read/whatshap/{sample}_{type}_{processing_unit}_{barcode}.whatshap_haplotagged.bam"
+        "long_read/whatshap/{sample}_{type}.whatshap_haplotagged.bam"
     output:
-        "long_read/whatshap/{sample}_{type}_{processing_unit}_{barcode}.whatshap_haplotagged.bam.bai"
+        "long_read/whatshap/{sample}_{type}.whatshap_haplotagged.bam.bai"
     params:
-        extra=config.get("whatshap_haplotag", {}).get("extra", ""), # optionally use --ignore-linked-read, --tag-supplementary, etc.
+        extra=config.get("whatshap_haplotag", {}).get("extra", ""), { optionally use --ignore-linked-read, --tag-supplementary, etc.
     log:
-        "long_read/whatshap/{sample}_{type}_{processing_unit}_{barcode}.whatshap_index.log"
+        "long_read/whatshap/{sample}_{type}.whatshap_index.log"
     threads: config.get("whatshap_haplotag", {}).get("threads", config["default_resources"]["threads"])
     resources:
         mem_mb=config.get("whatshap_haplotag", {}).get("mem_mb", config["default_resources"]["mem_mb"]),
@@ -82,5 +81,3 @@ rule whatshap_index:
         config.get("whatshap_index", {}).get("container", config["default_container"])
     wrapper:
         "v3.7.0/bio/samtools/index"
-
-        
