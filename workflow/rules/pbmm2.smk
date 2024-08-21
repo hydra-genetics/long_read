@@ -7,12 +7,12 @@ __license__ = "GPL-3"
 rule pbmm2_align:
     input:
         reference=config.get("pbmm2_align", {}).get("index", ""),
-        query=pbmm2_input
+        query=pbmm2_input,
     output:
         bam="long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.bam",
     params:
         preset=config.get("pbmm2_align", {}).get("preset", ""),
-        sample=lambda wildcards: wildcards.sample, 
+        sample=lambda wildcards: wildcards.sample,
         loglevel="INFO",
         extra=config.get("pbmm2_align", {}).get("extra", ""),
     log:
@@ -20,7 +20,7 @@ rule pbmm2_align:
     benchmark:
         repeat(
             "long_read/pbmm2_align/{sample}_{type}_{flowcell}_{barcode}.bam.benchmark.tsv",
-            config.get("pbmm2_align", {}).get("benchmark_repeats", 1)
+            config.get("pbmm2_align", {}).get("benchmark_repeats", 1),
         )
     threads: config.get("pbmm2_align", {}).get("threads", config["default_resources"]["threads"])
     resources:
