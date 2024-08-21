@@ -43,7 +43,7 @@ units = (
 
 validate(units, schema="../schemas/units.schema.yaml")
 
-output_spec = {'files':[]}
+output_spec = {"files": []}
 with open(config["output"]) as output:
     if config["output"].endswith("json"):
         output_spec = json.load(output)
@@ -74,7 +74,6 @@ def pbmm2_input(wildcards):
     return query_files
 
 
-
 def compile_output_file_list(wildcards):
     outdir = pathlib.Path(output_spec.get("directory", "./"))
     output_files = []
@@ -96,7 +95,6 @@ def compile_output_file_list(wildcards):
     return output_files
 
 
-
 def compile_paraphrase_file_list(wildcards):
     outdir = pathlib.Path("long_read/paraphrase/")
     output_files = []
@@ -116,7 +114,6 @@ def compile_paraphrase_file_list(wildcards):
         for op in outputpaths:
             output_files.append(outdir / Path(op))
     return output_files
-
 
 
 def generate_copy_rules(output_spec):
@@ -166,8 +163,8 @@ def generate_copy_rules(output_spec):
 
 def get_minimap2_query(wildcards):
     input = get_units(units, wildcards)
-    print ("UNITS:", units)
-    print ("INP:", input)
+    print("UNITS:", units)
+    print("INP:", input)
     if hasattr(input[0], "bam") and pandas.notna(input[0].bam):
         query_files = [input[0].bam]
     elif hasattr(input[0], "fastq1") and pandas.notna(input[0].fastq1):
@@ -182,7 +179,7 @@ def get_minimap2_query(wildcards):
 
 def get_hifiasm_query(wildcards):
     input = get_units(units, wildcards)
-    print ("INP:", input)
+    print("INP:", input)
     if hasattr(input[0], "bam") and pandas.notna(input[0].bam):
         query_files = [input[0].bam]
     elif hasattr(input[0], "fastq1") and pandas.notna(input[0].fastq1):
@@ -193,8 +190,6 @@ def get_hifiasm_query(wildcards):
         raise ValueError("Neither fastq or bam file configured for {wildcard.sample}")
     print(query_files)
     return query_files
-
-
 
 
 generate_copy_rules(output_spec)
