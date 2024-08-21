@@ -1,6 +1,7 @@
 # workflow/scripts/minimap2_get_readgroups.py
 import subprocess
 
+
 def extract_rg_lines(bam_file):
     """
     Extracts all @RG lines from a BAM file using samtools and returns them as a list.
@@ -37,5 +38,5 @@ def extract_rg_lines(bam_file):
         print(f"An unexpected error occurred: {e}")
         return []
 
-    return rg_lines
 
+    return rg_lines
