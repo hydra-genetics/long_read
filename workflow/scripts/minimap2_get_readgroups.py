@@ -38,5 +38,4 @@ def extract_rg_lines(bam_file):
         print(f"An unexpected error occurred: {e}")
         return []
 
-
     return rg_lines
