@@ -48,6 +48,7 @@ elif basecaller == "gpu":
             "-chunks_per_caller {params.chunks} "
             " {params.extra} &> {log} "
 
+
 elif basecaller == "cpu":
 
     rule guppy_basecaller_cpu:
@@ -86,6 +87,7 @@ elif basecaller == "cpu":
             "--num_callers {params.num_caller} "
             "--num_cpu_threads_per_caller {resources.threads} "
             " {params.extra} &> {log} "
+
 
 else:
     sys.exit("basecaller missing from config, valid options: gpu or cpu")
