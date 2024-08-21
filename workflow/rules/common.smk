@@ -72,6 +72,11 @@ def pbmm2_input(wildcards):
         raise ValueError("Neither fastq or bam file configured for {wildcard.sample}")
     print(query_files)
     return query_files
+    platform = 'PACBIO'
+    unit = units.loc[(wildcards.sample, wildcards.type, wildcards.flowcell, wildcards.barcode, platform)].dropna()
+    bam_file = unit["bam"]
+
+    return bam_file
 
 
 def compile_output_file_list(wildcards):
