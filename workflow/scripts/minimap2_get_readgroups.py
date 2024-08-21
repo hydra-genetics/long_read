@@ -38,3 +38,4 @@ def extract_rg_lines(bam_file):
         return []
 
     return rg_lines
+
