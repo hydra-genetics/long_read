@@ -3,7 +3,6 @@ __copyright__ = "Copyright 2023, Nina Hollfelder"
 __email__ = "nina_hollfelder@scilifelab.uu.se"
 __license__ = "GPL-3"
 
-
 basecaller = config.get("basecaller", None)
 
 if basecaller is None:
@@ -17,7 +16,7 @@ elif basecaller == "gpu":
             configfile=config["guppy_basecaller_gpu"]["configuration_file"],
         output:
             seqsum="long_read/guppy/sequencing_summary.txt",
-            #fastq=
+            fastq="long_read/guppy/guppy_basecaller.gpu.fastq",
         params:
             extra=config.get("guppy_basecaller_gpu", {}).get("extra", ""),
             gpu="cuda:0",
@@ -49,6 +48,7 @@ elif basecaller == "gpu":
             "-chunks_per_caller {params.chunks} "
             " {params.extra} &> {log} "
 
+
 elif basecaller == "cpu":
 
     rule guppy_basecaller_cpu:
@@ -57,7 +57,7 @@ elif basecaller == "cpu":
             configfile=config["guppy_basecaller_cpu"]["configuration_file"],
         output:
             seqsum="long_read/guppy/sequencing_summary.txt",
-            #fastq= #
+            fastq="long_read/guppy/guppy_basecaller_cpu.fastq",
         params:
             extra=config.get("guppy_basecaller_cpu", {}).get("extra", ""),
             num_caller=config.get("guppy_basecaller_cpu", {}).get("num_callers", "1"),
@@ -87,6 +87,7 @@ elif basecaller == "cpu":
             "--num_callers {params.num_caller} "
             "--num_cpu_threads_per_caller {resources.threads} "
             " {params.extra} &> {log} "
+
 
 else:
     sys.exit("basecaller missing from config, valid options: gpu or cpu")
